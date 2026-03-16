@@ -1,101 +1,102 @@
+aid: atlassian-jira
 name: Atlassian Jira
-description: Jira is a proprietary issue tracking product developed by Atlassian that allows bug tracking and agile project management.
-image: https://www.atlassian.com/dam/jcr:e33efd9e-e0b8-4d61-a24d-68a48f8e6b82/jira-icon-blue.svg
-url: https://www.atlassian.com/software/jira
-created: '2024-01-01'
-modified: '2024-01-01'
-specificationVersion: '0.16'
-apis:
-- name: Jira Cloud Platform REST API
-  description: The Jira Cloud platform REST API enables developers to interact with Jira issues, projects, workflows, users, and more.
-  image: https://www.atlassian.com/dam/jcr:e33efd9e-e0b8-4d61-a24d-68a48f8e6b82/jira-icon-blue.svg
-  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
-  baseURL: https://your-domain.atlassian.net/rest/api/3
-  tags:
-  - Projects
-  - Issues
-  - Workflows
-  - Agile
-  - Bug Tracking
-  properties:
-  - type: Documentation
-    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
-  - type: OpenAPI
-    url: https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
-  - type: Authentication
-    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
-  - type: Rate Limits
-    url: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
-- name: Jira Software Cloud REST API
-  description: REST API for Jira Software Cloud specific features including boards, sprints, and backlog management.
-  image: https://www.atlassian.com/dam/jcr:e33efd9e-e0b8-4d61-a24d-68a48f8e6b82/jira-icon-blue.svg
-  humanURL: https://developer.atlassian.com/cloud/jira/software/rest/intro/
-  baseURL: https://your-domain.atlassian.net/rest/agile/1.0
-  tags:
+description: >-
+  Jira is a proprietary issue tracking product developed by Atlassian that
+  allows bug tracking and agile project management. It provides REST APIs for
+  managing issues, projects, workflows, users, and boards across Jira Cloud,
+  Jira Software, and Jira Service Management.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Project Management
+  - Issue Tracking
   - Agile
   - Scrum
   - Kanban
-  - Boards
-  - Sprints
-  properties:
-  - type: Documentation
-    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
-  - type: OpenAPI
-    url: https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
-  - type: Authentication
-    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
-- name: Jira Service Management REST API
-  description: REST API for Jira Service Management features including request types, service desk queues, and customer portals.
-  image: https://www.atlassian.com/dam/jcr:e33efd9e-e0b8-4d61-a24d-68a48f8e6b82/jira-icon-blue.svg
-  humanURL: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
-  baseURL: https://your-domain.atlassian.net/rest/servicedeskapi
-  tags:
-  - Service Desk
+  - Bug Tracking
   - ITSM
-  - Customer Support
-  - Requests
-  properties:
-  - type: Documentation
-    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
-  - type: OpenAPI
-    url: https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json
-  - type: Authentication
-    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - Service Desk
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/atlassian-jira/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: atlassian-jira:jira-cloud-platform-rest-api
+    name: Jira Cloud Platform REST API
+    description: >-
+      The Jira Cloud platform REST API enables developers to interact with
+      Jira issues, projects, workflows, users, and more.
+    humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+    baseURL: https://your-domain.atlassian.net/rest/api/3
+    tags:
+      - Projects
+      - Issues
+      - Workflows
+      - Agile
+    properties:
+      - type: Documentation
+        url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+      - type: OpenAPI
+        url: https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+      - type: Authentication
+        url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - aid: atlassian-jira:jira-software-cloud-rest-api
+    name: Jira Software Cloud REST API
+    description: >-
+      REST API for Jira Software Cloud specific features including boards,
+      sprints, and backlog management.
+    humanURL: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+    baseURL: https://your-domain.atlassian.net/rest/agile/1.0
+    tags:
+      - Agile
+      - Scrum
+      - Kanban
+      - Boards
+    properties:
+      - type: Documentation
+        url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+      - type: OpenAPI
+        url: https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
+  - aid: atlassian-jira:jira-service-management-rest-api
+    name: Jira Service Management REST API
+    description: >-
+      REST API for Jira Service Management features including request types,
+      service desk queues, and customer portals.
+    humanURL: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+    baseURL: https://your-domain.atlassian.net/rest/servicedeskapi
+    tags:
+      - Service Desk
+      - ITSM
+      - Customer Support
+    properties:
+      - type: Documentation
+        url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+      - type: OpenAPI
+        url: https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json
 common:
-- type: Getting Started
-  url: https://developer.atlassian.com/cloud/jira/platform/getting-started/
-- type: API Status
-  url: https://status.atlassian.com/
-- type: Authentication Guide
-  url: https://developer.atlassian.com/cloud/jira/platform/authentication/
-- type: OAuth 2.0
-  url: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/
-- type: API Tokens
-  url: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
-- type: Webhooks
-  url: https://developer.atlassian.com/cloud/jira/platform/webhooks/
-- type: Developer Community
-  url: https://community.developer.atlassian.com/
-- type: Support
-  url: https://support.atlassian.com/
-- type: Terms of Service
-  url: https://www.atlassian.com/legal/cloud-terms-of-service
-- type: Privacy Policy
-  url: https://www.atlassian.com/legal/privacy-policy
-- type: Pricing
-  url: https://www.atlassian.com/software/jira/pricing
+  - type: Website
+    url: https://www.atlassian.com/software/jira
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/
+  - type: Getting Started
+    url: https://developer.atlassian.com/cloud/jira/platform/getting-started/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/
+  - type: Pricing
+    url: https://www.atlassian.com/software/jira/pricing
+  - type: Status
+    url: https://status.atlassian.com/
+  - type: Support
+    url: https://support.atlassian.com/
+  - type: Community
+    url: https://community.developer.atlassian.com/
+  - type: Terms of Service
+    url: https://www.atlassian.com/legal/cloud-terms-of-service
+  - type: Privacy Policy
+    url: https://www.atlassian.com/legal/privacy-policy
+  - type: GitHub Organization
+    url: https://github.com/atlassian
 maintainers:
-- name: Atlassian
-  email: developer@atlassian.com
-  url: https://developer.atlassian.com/
-tags:
-- Project Management
-- Issue Tracking
-- Agile
-- Scrum
-- Kanban
-- Bug Tracking
-- ITSM
-- Service Desk
-- Collaboration
-- Workflow Management
+  - FN: Kin Lane
+    email: kin@apievangelist.com
