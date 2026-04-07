@@ -8,13 +8,13 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Project Management
-  - Issue Tracking
   - Agile
-  - Scrum
-  - Kanban
   - Bug Tracking
+  - Issue Tracking
   - ITSM
+  - Kanban
+  - Project Management
+  - Scrum
   - Service Desk
 url: >-
   https://raw.githubusercontent.com/api-evangelist/atlassian-jira/refs/heads/main/apis.yml
@@ -30,10 +30,10 @@ apis:
     humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
     baseURL: https://your-domain.atlassian.net/rest/api/3
     tags:
-      - Projects
-      - Issues
-      - Workflows
       - Agile
+      - Issues
+      - Projects
+      - Workflows
     properties:
       - type: Documentation
         url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
@@ -50,9 +50,9 @@ apis:
     baseURL: https://your-domain.atlassian.net/rest/agile/1.0
     tags:
       - Agile
-      - Scrum
-      - Kanban
       - Boards
+      - Kanban
+      - Scrum
     properties:
       - type: Documentation
         url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
@@ -66,9 +66,9 @@ apis:
     humanURL: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
     baseURL: https://your-domain.atlassian.net/rest/servicedeskapi
     tags:
-      - Service Desk
-      - ITSM
       - Customer Support
+      - ITSM
+      - Service Desk
     properties:
       - type: Documentation
         url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
