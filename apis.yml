@@ -77,23 +77,23 @@ common:
   url: https://www.atlassian.com/software/jira
 - type: Documentation
   url: https://developer.atlassian.com/cloud/jira/platform/
-- type: Getting Started
+- type: GettingStarted
   url: https://developer.atlassian.com/cloud/jira/platform/getting-started/
 - type: Authentication
   url: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/
 - type: Pricing
   url: https://www.atlassian.com/software/jira/pricing
-- type: Status
+- type: StatusPage
   url: https://status.atlassian.com/
 - type: Support
   url: https://support.atlassian.com/
 - type: Community
   url: https://community.developer.atlassian.com/
-- type: Terms of Service
+- type: TermsOfService
   url: https://www.atlassian.com/legal/cloud-terms-of-service
-- type: Privacy Policy
+- type: PrivacyPolicy
   url: https://www.atlassian.com/legal/privacy-policy
-- type: GitHub Organization
+- type: GitHubOrganization
   url: https://github.com/atlassian
 - type: Blog
   url: https://developer.atlassian.com/blog/
