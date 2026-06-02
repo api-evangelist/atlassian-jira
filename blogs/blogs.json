@@ -2,12 +2,20 @@
   "repo": "atlassian-jira",
   "feeds": [
     {
-      "source": "https://developer.atlassian.com/blog/",
+      "source": "https://www.atlassian.com/blog/comments/feed",
       "feed_url": "https://www.atlassian.com/blog/comments/feed",
-      "title": "Comments for Inside Atlassian",
-      "saved": 4
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/atlassian",
+      "feed_url": "https://github.com/atlassian",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:48:52Z",
-  "post_count": 4
+  "fetched": "2026-06-01T23:35:02Z",
+  "post_count": 6
 }
