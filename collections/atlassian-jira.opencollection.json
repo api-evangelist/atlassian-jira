@@ -1,0 +1,346 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get issue"
+        },
+        {
+          "info": {
+            "name": "Edit issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Edit issue"
+        },
+        {
+          "info": {
+            "name": "Delete issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Delete issue"
+        },
+        {
+          "info": {
+            "name": "Bulk create issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issues"
+          },
+          "docs": "Bulk create issues"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issue Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for issues using JQL (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/search",
+            "params": [
+              {
+                "name": "jql",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search for issues using JQL (GET)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project"
+          },
+          "docs": "Get all projects"
+        },
+        {
+          "info": {
+            "name": "Create project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project"
+          },
+          "docs": "Create project"
+        },
+        {
+          "info": {
+            "name": "Get project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project/:projectIdOrKey",
+            "params": [
+              {
+                "name": "projectIdOrKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get project"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/user",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issue Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get comments"
+        },
+        {
+          "info": {
+            "name": "Add comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Add comment"
+        },
+        {
+          "info": {
+            "name": "Update comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment/:id",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update comment"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/field"
+          },
+          "docs": "Get fields"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issue Worklogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add worklog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/worklog",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Add worklog"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issue Transitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/transitions",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get transitions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
