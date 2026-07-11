@@ -73,6 +73,14 @@ apis:
     - type: OpenAPI
       url: https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json
 common:
+  - type: TrustCenter
+    url: security/atlassian-jira-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/atlassian-jira-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/atlassian-jira-domain-security.yml
+  - type: Authentication
+    url: authentication/atlassian-jira-authentication.yml
   - type: OAuthScopes
     url: scopes/atlassian-jira-scopes.yml
   - type: LinkedIn

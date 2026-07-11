@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/atlassian-jira-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Email + API token via HTTP Basic auth.
+  sources:
+  - openapi/atlassian-jira-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+    scopes: 4
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+  sources:
+  - openapi/atlassian-jira-openapi.yml
