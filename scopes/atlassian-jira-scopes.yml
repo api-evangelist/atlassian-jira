@@ -1,0 +1,36 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/atlassian-jira-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/atlassian-jira-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+scopes:
+- scope: manage:jira-project
+  description: Manage Jira projects
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-openapi.yml
+- scope: read:jira-user
+  description: Read Jira user
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-openapi.yml
+- scope: read:jira-work
+  description: Read Jira work
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-openapi.yml
+- scope: write:jira-work
+  description: Write Jira work
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-openapi.yml
