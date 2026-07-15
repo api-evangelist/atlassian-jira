@@ -73,6 +73,8 @@ apis:
     - type: OpenAPI
       url: https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/atlassian-jira-agentic-access.yml
   - type: TrustCenter
     url: security/atlassian-jira-trust-center.yml
   - type: VulnerabilityDisclosure
