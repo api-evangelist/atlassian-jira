@@ -1,0 +1,80 @@
+openapi: 3.1.0
+info:
+  title: Atlassian Jira Cloud Platform REST API v3 Fields Projects API
+  description: 'Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API
+
+    (version 3). This spec covers a representative subset of issue, project, user,
+
+    search, comment and workflow operations. Derived from the public developer
+
+    documentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.
+
+    '
+  version: '3'
+  contact:
+    name: Atlassian Developer
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/
+servers:
+- url: https://{your-domain}.atlassian.net
+  description: Jira Cloud site
+  variables:
+    your-domain:
+      default: example
+      description: Your Atlassian site domain
+security:
+- basicAuth: []
+- OAuth2: []
+tags:
+- name: Projects
+  description: Manage Jira projects.
+paths:
+  /rest/api/3/project:
+    get:
+      tags:
+      - Projects
+      summary: Get all projects
+      operationId: getAllProjects
+      responses:
+        '200':
+          description: Projects returned
+    post:
+      tags:
+      - Projects
+      summary: Create project
+      operationId: createProject
+      responses:
+        '201':
+          description: Project created
+  /rest/api/3/project/{projectIdOrKey}:
+    get:
+      tags:
+      - Projects
+      summary: Get project
+      operationId: getProject
+      parameters:
+      - in: path
+        name: projectIdOrKey
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Project returned
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Email + API token via HTTP Basic auth.
+    OAuth2:
+      type: oauth2
+      description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/oauth/token
+          scopes:
+            read:jira-work: Read Jira work
+            write:jira-work: Write Jira work
+            read:jira-user: Read Jira user
+            manage:jira-project: Manage Jira projects
