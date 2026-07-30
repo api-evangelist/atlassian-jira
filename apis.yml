@@ -3,7 +3,20 @@ name: Atlassian Jira
 description: |
   Jira is a leading issue tracking and project management platform developed by Atlassian. It provides REST APIs for Jira Cloud Platform, Jira Software, and Jira Service Management enabling programmatic management of issues, projects, workflows, boards, sprints, users, and service desk requests with OAuth 2.0 authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/atlassian-jira.png
 tags:
   - Agile
   - Atlassian
@@ -20,58 +33,150 @@ created: '2024-01-01'
 modified: '2026-04-19'
 specificationVersion: '0.19'
 apis:
-  - aid: atlassian-jira:jira-cloud-platform-rest-api
-    name: Jira Cloud Platform REST API
-    description: >-
-      The Jira Cloud platform REST API enables developers to interact with
-      Jira issues, projects, workflows, users, and more.
-    humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
-    baseURL: https://your-domain.atlassian.net/rest/api/3
-    tags:
-    - Agile
-    - Issues
-    - Projects
-    - Workflows
-    properties:
-    - type: Documentation
-      url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
-    - type: OpenAPI
-      url: https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
-    - type: Authentication
-      url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
-  - aid: atlassian-jira:jira-software-cloud-rest-api
-    name: Jira Software Cloud REST API
-    description: >-
-      REST API for Jira Software Cloud specific features including boards,
-      sprints, and backlog management.
-    humanURL: https://developer.atlassian.com/cloud/jira/software/rest/intro/
-    baseURL: https://your-domain.atlassian.net/rest/agile/1.0
-    tags:
-    - Agile
-    - Boards
-    - Kanban
-    - Scrum
-    properties:
-    - type: Documentation
-      url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
-    - type: OpenAPI
-      url: https://developer.atlassian.com/cloud/jira/software/swagger.v3.json
-  - aid: atlassian-jira:jira-service-management-rest-api
-    name: Jira Service Management REST API
-    description: >-
-      REST API for Jira Service Management features including request types,
-      service desk queues, and customer portals.
-    humanURL: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
-    baseURL: https://your-domain.atlassian.net/rest/servicedeskapi
-    tags:
-    - Customer Support
-    - Itsm
-    - Service Desk
-    properties:
-    - type: Documentation
-      url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
-    - type: OpenAPI
-      url: https://developer.atlassian.com/cloud/jira/service-desk/swagger.v3.json
+- aid: atlassian-jira:atlassian-jira-fields-api
+  name: Atlassian Jira Fields API
+  description: Read Jira field metadata.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-issue-comments-api
+  name: Atlassian Jira Issue Comments API
+  description: Manage comments on issues.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Issue Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-issue-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-issue-search-api
+  name: Atlassian Jira Issue Search API
+  description: Search issues using JQL.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Issue Search
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-issue-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-issue-transitions-api
+  name: Atlassian Jira Issue Transitions API
+  description: List and perform workflow transitions.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Issue Transitions
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-issue-worklogs-api
+  name: Atlassian Jira Issue Worklogs API
+  description: Manage worklogs on issues.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Issue Worklogs
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-issues-api
+  name: Atlassian Jira Issues API
+  description: Create, read, update and delete Jira issues.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Issues
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-issues-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-projects-api
+  name: Atlassian Jira Projects API
+  description: Manage Jira projects.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-users-api
+  name: Atlassian Jira Users API
+  description: Read user information.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net/rest/api/3
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
 common:
   - type: AgenticAccess
     url: agentic-access/atlassian-jira-agentic-access.yml
