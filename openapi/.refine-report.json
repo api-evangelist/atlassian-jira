@@ -1,0 +1,28 @@
+{
+  "provider": "atlassian-jira",
+  "sources": [
+    "atlassian-jira-fields-api-openapi.yml",
+    "atlassian-jira-issue-comments-api-openapi.yml",
+    "atlassian-jira-issue-search-api-openapi.yml",
+    "atlassian-jira-issue-transitions-api-openapi.yml",
+    "atlassian-jira-issue-worklogs-api-openapi.yml",
+    "atlassian-jira-issues-api-openapi.yml",
+    "atlassian-jira-projects-api-openapi.yml",
+    "atlassian-jira-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "atlassian-jira-fields-api-openapi.yml",
+    "atlassian-jira-issue-comments-api-openapi.yml",
+    "atlassian-jira-issue-search-api-openapi.yml",
+    "atlassian-jira-issue-transitions-api-openapi.yml",
+    "atlassian-jira-issue-worklogs-api-openapi.yml",
+    "atlassian-jira-issues-api-openapi.yml",
+    "atlassian-jira-projects-api-openapi.yml",
+    "atlassian-jira-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
