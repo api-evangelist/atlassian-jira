@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "6a144585-6f70-497a-b1aa-c7476ac6d78c",
+      "name": "Users",
+      "description": {
+        "content": "Read user information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d8e10f26-c713-43d0-9be8-d602b002ea8b",
+          "name": "Get user",
+          "request": {
+            "name": "Get user",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99126020-f08b-4d1b-8f28-20eb0bc08f70",
+              "name": "User returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Atlassian site domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "your-domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{your-domain}}.atlassian.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c1daa28a-1c79-402c-ab52-e963d1ad1213",
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API\n(version 3). This spec covers a representative subset of issue, project, user,\nsearch, comment and workflow operations. Derived from the public developer\ndocumentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.\n\n\nContact Support:\n Name: Atlassian Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "item": [
+    {
+      "id": "79e52f10-e450-43dc-ac2a-312264b618ed",
+      "name": "Issues",
+      "description": {
+        "content": "Create, read, update and delete Jira issues.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e8e28be-8dce-43ac-a961-3c75fb94a994",
+          "name": "Get issue",
+          "request": {
+            "name": "Get issue",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b07028a9-cc3a-489e-9cd7-72857aacd328",
+              "name": "Issue returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be69f57f-f604-4743-b0ef-686de451b2e0",
+          "name": "Edit issue",
+          "request": {
+            "name": "Edit issue",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd8db06f-8cbd-44b7-9540-aa7301afc55f",
+              "name": "Issue updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f851e90d-22ab-451f-8f84-393281676f42",
+          "name": "Delete issue",
+          "request": {
+            "name": "Delete issue",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8145f5ae-ed3e-4124-9635-2e4a91e13aed",
+              "name": "Issue deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36a17853-63d6-4407-b02e-71462b12ca02",
+          "name": "Bulk create issues",
+          "request": {
+            "name": "Bulk create issues",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f411c0c6-2391-458b-a65e-176ec2295286",
+              "name": "Issues created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Atlassian site domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "your-domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{your-domain}}.atlassian.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9ef4dfae-bf46-4b88-81d5-6470b1f2d0cc",
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API\n(version 3). This spec covers a representative subset of issue, project, user,\nsearch, comment and workflow operations. Derived from the public developer\ndocumentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.\n\n\nContact Support:\n Name: Atlassian Developer",
+      "type": "text/plain"
+    }
+  }
+}

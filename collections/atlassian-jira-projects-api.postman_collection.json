@@ -1,0 +1,325 @@
+{
+  "item": [
+    {
+      "id": "56c59ad7-ba36-4027-b362-dd8a6ea446ed",
+      "name": "Projects",
+      "description": {
+        "content": "Manage Jira projects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e834822-9db2-4018-b8ad-8efb79291d80",
+          "name": "Get all projects",
+          "request": {
+            "name": "Get all projects",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71363b02-2ffa-4aec-b919-51e796c06d78",
+              "name": "Projects returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a06f4a0-96af-4705-891a-653ce1ee5fe1",
+          "name": "Create project",
+          "request": {
+            "name": "Create project",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "432b2151-ada4-46b1-8ae9-55188af17bee",
+              "name": "Project created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "914e5e73-c0e3-4d20-aa94-1d2d07768082",
+          "name": "Get project",
+          "request": {
+            "name": "Get project",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "project",
+                ":projectIdOrKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectIdOrKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0efce79f-afb4-48f0-9967-e39e57d7b0e9",
+              "name": "Project returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "project",
+                    ":projectIdOrKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectIdOrKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Atlassian site domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "your-domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{your-domain}}.atlassian.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a12922d9-ddcc-4f7c-9faa-84bafe0b432c",
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API\n(version 3). This spec covers a representative subset of issue, project, user,\nsearch, comment and workflow operations. Derived from the public developer\ndocumentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.\n\n\nContact Support:\n Name: Atlassian Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issue Worklogs API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issue Worklogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add worklog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/worklog",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Add worklog"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

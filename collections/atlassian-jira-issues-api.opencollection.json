@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issues API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get issue"
+        },
+        {
+          "info": {
+            "name": "Edit issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Edit issue"
+        },
+        {
+          "info": {
+            "name": "Delete issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Delete issue"
+        },
+        {
+          "info": {
+            "name": "Bulk create issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issues"
+          },
+          "docs": "Bulk create issues"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

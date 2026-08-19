@@ -1,0 +1,379 @@
+{
+  "item": [
+    {
+      "id": "d1cf71f8-25a7-4fe0-ab42-d0b9d00632cb",
+      "name": "Issue Comments",
+      "description": {
+        "content": "Manage comments on issues.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6bc4a07-b43d-4331-bd49-6290e33f18e7",
+          "name": "Get comments",
+          "request": {
+            "name": "Get comments",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb647fc4-c584-418f-b7ac-e7221b67bb42",
+              "name": "Comments returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bf22951-ff9b-4138-b56a-f1640f726efe",
+          "name": "Add comment",
+          "request": {
+            "name": "Add comment",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2e56e56-7eed-4d08-b1a0-4e0fadd1621f",
+              "name": "Comment added",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67c94cae-7605-4b6b-8256-33ed63b532f6",
+          "name": "Update comment",
+          "request": {
+            "name": "Update comment",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "issue",
+                ":issueIdOrKey",
+                "comment",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "issueIdOrKey",
+                  "description": "(Required) Numeric ID or human key of the issue"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54b753d8-69db-44ac-86a5-d23c7b1fb017",
+              "name": "Comment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "issue",
+                    ":issueIdOrKey",
+                    "comment",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "issueIdOrKey",
+                      "description": "(Required) Numeric ID or human key of the issue"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Atlassian site domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "your-domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{your-domain}}.atlassian.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "55ef91ba-df7d-472b-a32c-b0f56fe1066d",
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issue Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API\n(version 3). This spec covers a representative subset of issue, project, user,\nsearch, comment and workflow operations. Derived from the public developer\ndocumentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.\n\n\nContact Support:\n Name: Atlassian Developer",
+      "type": "text/plain"
+    }
+  }
+}

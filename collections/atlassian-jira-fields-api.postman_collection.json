@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "f771cbcd-98f6-44f4-a0fc-bf6d3ecc6be5",
+      "name": "Fields",
+      "description": {
+        "content": "Read Jira field metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c9f6415-3853-4970-8e20-9b11e2129200",
+          "name": "Get fields",
+          "request": {
+            "name": "Get fields",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "api",
+                "3",
+                "field"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Atlassian site domain",
+                  "type": "any",
+                  "value": "{{your-domain}}",
+                  "key": "your-domain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e1645e6-a918-4974-a69f-e2b6b12470c7",
+              "name": "Fields returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "api",
+                    "3",
+                    "field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Atlassian site domain",
+                      "type": "any",
+                      "value": "{{your-domain}}",
+                      "key": "your-domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Atlassian site domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "example",
+      "key": "your-domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{your-domain}}.atlassian.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0630d9ea-7368-4133-97d9-0514eb9a093a",
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API\n(version 3). This spec covers a representative subset of issue, project, user,\nsearch, comment and workflow operations. Derived from the public developer\ndocumentation at https://developer.atlassian.com/cloud/jira/platform/rest/v3/.\n\n\nContact Support:\n Name: Atlassian Developer",
+      "type": "text/plain"
+    }
+  }
+}

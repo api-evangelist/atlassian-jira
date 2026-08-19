@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Projects API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project"
+          },
+          "docs": "Get all projects"
+        },
+        {
+          "info": {
+            "name": "Create project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project"
+          },
+          "docs": "Create project"
+        },
+        {
+          "info": {
+            "name": "Get project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/project/:projectIdOrKey",
+            "params": [
+              {
+                "name": "projectIdOrKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

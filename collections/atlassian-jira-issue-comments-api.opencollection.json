@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issue Comments API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issue Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get comments"
+        },
+        {
+          "info": {
+            "name": "Add comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Add comment"
+        },
+        {
+          "info": {
+            "name": "Update comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/comment/:id",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update comment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

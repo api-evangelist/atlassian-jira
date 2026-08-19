@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issue Transitions API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issue Transitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get transitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/issue/:issueIdOrKey/transitions",
+            "params": [
+              {
+                "name": "issueIdOrKey",
+                "value": "",
+                "type": "path",
+                "description": "Numeric ID or human key of the issue"
+              }
+            ]
+          },
+          "docs": "Get transitions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

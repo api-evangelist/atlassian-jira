@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Atlassian Jira Cloud Platform REST API v3 Fields Issue Search API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issue Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for issues using JQL (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{your-domain}.atlassian.net/rest/api/3/search",
+            "params": [
+              {
+                "name": "jql",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startAt",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search for issues using JQL (GET)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
