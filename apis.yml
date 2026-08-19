@@ -31,7 +31,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/atlassian-jira/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-04-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: atlassian-jira:atlassian-jira-fields-api
   name: Atlassian Jira Fields API
