@@ -147,6 +147,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
   baseURL: https://your-domain.atlassian.net/rest/api/3
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -165,6 +167,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
   baseURL: https://your-domain.atlassian.net/rest/api/3
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
