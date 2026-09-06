@@ -4,172 +4,148 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Atlassian Jira
 providerId: atlassian-jira
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Agile
-  - Atlassian
-  - Bug Tracking
-  - Issue Tracking
-  - ITSM
-  - Kanban
-  - Project Management
-  - Scrum
-  - Service Desk
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+modified: '2026-09-06'
+generated: '2026-09-06'
+method: probed
+source: |
+  Read on 2026-09-06 from the schema.org Product/Offer JSON-LD that Atlassian embeds in
+  https://www.atlassian.com/software/jira/pricing — a machine-readable pricing document the provider
+  publishes itself, not a scraped price label. Tier limits that the JSON-LD does not carry (storage,
+  automation steps, support, uptime SLA) were read from Atlassian's own plan comparison at
+  https://support.atlassian.com/jira-cloud-administration/docs/explore-jira-cloud-plans/.
+  This file REPLACES a 2026-05-04 bulk-sweep scaffold whose tiers, quotas and prices were placeholder
+  values invented by the sweep. Nothing from that scaffold survives.
+currency: USD
+billing_period: month
+billing_unit: per user
+notes: |
+  Jira is priced per seat, not per API call. There is no API-metered plan and no paid API tier: the
+  REST API, the webhook surface and the remote MCP server are included with every plan including Free.
+  What DOES vary by plan is the rate-limit budget — see rate-limits/atlassian-jira-rate-limits.yml,
+  where the per-tenant hourly point quota scales Free 65,000 / Standard 100,000 + 10 x users /
+  Premium 130,000 + 20 x users / Enterprise 150,000 + 30 x users (capped 500,000). That quota table is
+  the closest thing Jira has to API pricing.
 plans:
-  - id: atlassian-jira-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Atlassian Jira API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Jira Cloud Platform REST API
-      - name: Jira Software Cloud REST API
-      - name: Jira Service Management REST API
-  - id: atlassian-jira-pro
-    name: Professional
-    type: paid
-    description: Production tier for Atlassian Jira. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Jira Cloud Platform REST API
-      - name: Jira Software Cloud REST API
-      - name: Jira Service Management REST API
-  - id: atlassian-jira-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Atlassian Jira. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://your-domain.atlassian.net/rest/api/3
-          - https://your-domain.atlassian.net/rest/agile/1.0
-          - https://your-domain.atlassian.net/rest/servicedeskapi
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Jira Cloud Platform REST API
-      - name: Jira Software Cloud REST API
-      - name: Jira Service Management REST API
+- id: atlassian-jira-free
+  name: Free
+  type: freemium
+  price: 0
+  currency: USD
+  period: month
+  unit: per user/month
+  max_users: 10
+  description: Free forever for up to 10 users. Includes backlog, board, timeline, reports, 2 GB
+    storage, and community support.
+  signup: https://www.atlassian.com/try/cloud/signup?bundle=jira-software&edition=free
+  limits:
+  - name: users
+    limit: 10
+  - name: file_storage
+    limit: 2
+    unit: GB
+  - name: automation_steps
+    limit: 150
+    unit: steps per subscription per month
+  - name: support
+    value: community
+  - name: uptime_sla
+    value: none
+  - name: api_rate_limit_points
+    limit: 65000
+    unit: points per hour
+    source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+- id: atlassian-jira-standard
+  name: Standard
+  type: paid
+  price: 7.91
+  currency: USD
+  period: month
+  unit: per user/month
+  max_users: 50000
+  max_users_note: |
+    The pricing JSON-LD states eligibleQuantity maxValue 50000; Atlassian's plan comparison page
+    states "up to 100,000 users" for the same plan. Both are recorded because the provider publishes
+    both; neither was reconciled by Atlassian.
+  description: Everything you need to get started. Includes advanced permissions, audit logs, data
+    residency, and 250 GB storage.
+  signup: https://www.atlassian.com/try/cloud/signup?bundle=jira-software&edition=standard
+  limits:
+  - name: file_storage
+    limit: 250
+    unit: GB
+  - name: automation_steps
+    limit: 400
+    unit: steps per user per month
+  - name: support
+    value: local business hours
+  - name: uptime_sla
+    value: none
+  - name: api_rate_limit_points
+    formula: 100000 + (10 x users)
+    unit: points per hour
+    source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+- id: atlassian-jira-premium
+  name: Premium
+  type: paid
+  price: 14.54
+  currency: USD
+  period: month
+  unit: per user/month
+  max_users: 50000
+  description: Align multiple teams. Includes advanced roadmaps, sandbox environments, release tracks,
+    IP allowlisting, unlimited storage, and 24/7 Premium support.
+  signup: https://www.atlassian.com/try/cloud/signup?bundle=jira-software&edition=premium
+  limits:
+  - name: file_storage
+    value: unlimited
+  - name: automation_steps
+    limit: 750
+    unit: steps per user per month
+  - name: support
+    value: 24/7 Premium support
+  - name: uptime_sla
+    value: '99.9%'
+  - name: sandbox
+    value: included
+    note: The sandbox environment is a Premium/Enterprise feature — see
+      sandbox/atlassian-jira-sandbox.yml.
+  - name: api_rate_limit_points
+    formula: 130000 + (20 x users)
+    unit: points per hour
+    source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+- id: atlassian-jira-enterprise
+  name: Enterprise
+  type: enterprise
+  price: null
+  price_note: |
+    Not present in the pricing page's JSON-LD offers[] — Atlassian quotes Enterprise through sales and
+    bills annually. No price is asserted here.
+  currency: USD
+  period: year
+  billing: annual only
+  limits:
+  - name: file_storage
+    value: unlimited
+  - name: automation_steps
+    limit: 1000
+    unit: steps per user per month
+  - name: support
+    value: 24/7 Enterprise support
+  - name: uptime_sla
+    value: '99.95%'
+  - name: api_rate_limit_points
+    formula: 150000 + (30 x users), capped at 500000
+    unit: points per hour
+    source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+plan_count: 4
+pricing_url: https://www.atlassian.com/software/jira/pricing
+plan_comparison_url: https://support.atlassian.com/jira-cloud-administration/docs/explore-jira-cloud-plans/
+tags:
+- Agile
+- Atlassian
+- Issue Tracking
+- Project Management
+- Pricing
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

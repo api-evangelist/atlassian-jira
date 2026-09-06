@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Atlassian Jira Cloud Platform REST API v3 Fields Issue Transitions API
   description: 'Best-effort OpenAPI 3.1 description of the Atlassian Jira Cloud platform REST API
@@ -14,6 +14,17 @@ info:
   contact:
     name: Atlassian Developer
     url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/
+  x-provenance:
+    method: derived
+    derived-from: documentation
+    note: >-
+      This document was written from the Atlassian developer documentation, not harvested from
+      Atlassian. It describes a representative subset of Jira operations. As of 2026-09-06 the
+      repository also carries Atlassian's own published OpenAPI definitions
+      (openapi/atlassian-jira-platform-openapi.json, -software-, -service-management-), which are
+      authoritative and supersede this file for every purpose except the per-tag split.
+    superseded-by: openapi/atlassian-jira-platform-openapi.json
+    stamped: '2026-09-06'
 servers:
 - url: https://{your-domain}.atlassian.net
   description: Jira Cloud site

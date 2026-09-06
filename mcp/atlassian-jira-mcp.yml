@@ -1,0 +1,245 @@
+specification: API Commons MCPServer
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+name: Atlassian Remote MCP Server (Rovo MCP Server)
+generated: '2026-09-06'
+method: searched
+status: published
+source: |
+  Provider-published. The server is announced at https://www.atlassian.com/platform/remote-mcp-server
+  and documented at https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/.
+  Endpoints were probed directly on 2026-09-06: an unauthenticated JSON-RPC tools/list POST to
+  https://mcp.atlassian.com/v1/mcp/authv2 returns HTTP 401 with
+  WWW-Authenticate: Bearer resource_metadata="https://mcp.atlassian.com/.well-known/oauth-protected-resource/v1/mcp/authv2",
+  which is a live OAuth-protected MCP surface, not a missing one. The tool inventory below is
+  therefore the provider's own published list, not a live tools/list response — schemas require an
+  authenticated introspection this pipeline does not perform.
+deployment:
+  mode: remote
+  endpoint: https://mcp.atlassian.com/v1/mcp/authv2
+  auth: oauth
+  verified: probed
+alternate_endpoints:
+- url: https://mcp.atlassian.com/v2/mcp
+  transport: streamable-http
+  status: 401
+  note: v2 endpoint named in the supported-tools documentation; accepts a ?tools=all override that
+    returns every tool as a paginated flat list instead of the default deferred-tool set.
+- url: https://mcp.atlassian.com/v1/mcp
+  transport: streamable-http
+  status: 401
+- url: https://mcp.atlassian.com/v1/sse
+  transport: sse
+  status: 401
+  note: The original SSE endpoint, still live and still returning an OAuth challenge.
+oauth:
+  authorization_server: https://mcp.atlassian.com
+  authorization_server_metadata: https://mcp.atlassian.com/.well-known/oauth-authorization-server
+  protected_resource_metadata: https://mcp.atlassian.com/.well-known/oauth-protected-resource/v1/mcp/authv2
+  dynamic_client_registration: https://mcp.atlassian.com/v1/register
+  pkce: [S256, plain]
+  upstream_authorization_server: https://auth.atlassian.com/VCeDsk8ZHncYF1g234fKtc4lNipbBhu3
+  scopes_supported:
+  - read:me
+  - read:account
+  - offline_access
+  - email
+  - read:jira-work
+  - write:jira-work
+  - search:confluence
+  - read:confluence-user
+  - read:page:confluence
+  - write:page:confluence
+  - read:comment:confluence
+  - write:comment:confluence
+  - read:space:confluence
+  - read:hierarchical-content:confluence
+  - write:component:compass
+  - read:component:compass
+  - read:scorecard:compass
+  - write:scorecard:compass
+  - read:event:compass
+  - read:metric:compass
+  - read:all:twg
+  - write:all:twg
+products_covered:
+- Jira
+- Jira Service Management
+- Confluence
+- Bitbucket Cloud
+- Compass
+- Loom
+- Atlassian Teamwork Graph
+toolsets:
+- name: read_jira
+  enabled_by_default: true
+- name: write_jira
+  enabled_by_default: true
+- name: search_jira
+  enabled_by_default: true
+- name: delete_jira
+  enabled_by_default: false
+  note: Disabled by admin default.
+- name: manage_jira
+  enabled_by_default: false
+  note: Disabled by admin default.
+- name: read_jsm
+  enabled_by_default: true
+  note: API-token authentication only.
+- name: write_jsm
+  enabled_by_default: true
+  note: API-token authentication only.
+tools:
+- name: atlassianUserInfo
+  toolset: common
+  description: Retrieve authenticated user account details.
+- name: getAccessibleAtlassianResources
+  toolset: common
+  description: List accessible Atlassian sites and apps with their cloudId values.
+- name: discover
+  toolset: common
+  description: Natural-language search for deferred tools.
+- name: executeRead
+  toolset: common
+  description: Run a deferred read tool.
+- name: executeWrite
+  toolset: common
+  description: Run a deferred write tool with confirmation.
+- name: executeDestructive
+  toolset: common
+  description: Run a deferred destructive tool with confirmation.
+- name: getContentFormatGuide
+  toolset: common
+  description: Rich-content authoring format guidance.
+- name: getJiraIssue
+  toolset: read_jira
+  description: Retrieve a work item by id or key.
+- name: listJiraProjects
+  toolset: read_jira
+- name: listJiraProjectIssueTypesMetadata
+  toolset: read_jira
+- name: getJiraIssueTypeMetaWithFields
+  toolset: read_jira
+- name: listJiraIssueTransitions
+  toolset: read_jira
+- name: listJiraIssueLinkTypes
+  toolset: read_jira
+- name: listJiraIssueRemoteIssueLinks
+  toolset: read_jira
+- name: listJiraIssueWorklogs
+  toolset: read_jira
+- name: lookupJiraAccountId
+  toolset: read_jira
+- name: findJiraIssueAssignableUsers
+  toolset: read_jira
+- name: listJiraIssueComments
+  toolset: read_jira
+- name: listJiraIssueChangelogs
+  toolset: read_jira
+- name: getJiraCurrentUser
+  toolset: read_jira
+- name: getJiraUser
+  toolset: read_jira
+- name: listJiraStatuses
+  toolset: read_jira
+- name: listJiraProjectComponents
+  toolset: read_jira
+- name: getJiraProjectVersions
+  toolset: read_jira
+- name: getJiraProjectVersionRelatedWork
+  toolset: read_jira
+- name: listJiraBoards
+  toolset: read_jira
+- name: getJiraBoardConfig
+  toolset: read_jira
+- name: getJiraBoardIssueData
+  toolset: read_jira
+- name: getJiraBoardSprintData
+  toolset: read_jira
+- name: listJiraBoardSprints
+  toolset: read_jira
+- name: listJiraFilters
+  toolset: read_jira
+- name: listJiraDashboards
+  toolset: read_jira
+- name: getJiraEntityProperty
+  toolset: read_jira
+- name: downloadJiraIssueAttachment
+  toolset: read_jira
+- name: createJiraIssue
+  toolset: write_jira
+  description: Create a new work item.
+- name: editJiraIssue
+  toolset: write_jira
+  description: Modify an existing work item.
+- name: transitionJiraIssue
+  toolset: write_jira
+  description: Change a work item status or sprint assignment.
+- name: addOrEditJiraIssueComment
+  toolset: write_jira
+- name: addOrEditJiraIssueWorklog
+  toolset: write_jira
+- name: createJiraIssueLink
+  toolset: write_jira
+- name: manageJiraProjectVersion
+  toolset: write_jira
+- name: manageJiraProjectVersionRelatedWork
+  toolset: write_jira
+- name: manageJiraSprint
+  toolset: write_jira
+- name: createJiraBoard
+  toolset: write_jira
+- name: watchJiraIssue
+  toolset: write_jira
+- name: uploadAttachmentToJiraIssue
+  toolset: write_jira
+- name: editJiraEntityProperty
+  toolset: write_jira
+- name: searchJiraIssuesUsingJql
+  toolset: search_jira
+  description: Search work items using JQL.
+- name: deleteJiraIssue
+  toolset: delete_jira
+- name: deleteJiraComment
+  toolset: delete_jira
+- name: deleteJiraIssueAttachment
+  toolset: delete_jira
+- name: createJiraProject
+  toolset: manage_jira
+- name: updateJiraProject
+  toolset: manage_jira
+- name: getJsmOpsAlerts
+  toolset: read_jsm
+- name: getJsmOpsScheduleInfo
+  toolset: read_jsm
+- name: getJsmOpsTeamInfo
+  toolset: read_jsm
+- name: updateJsmOpsAlert
+  toolset: write_jsm
+tool_count_total: 57
+tool_count_jira_and_jsm: 50
+tool_count_common: 7
+tool_count_note: |
+  Jira/JSM tools plus the server's common tools. The full server also exposes Confluence, Bitbucket,
+  Compass, Loom, Goals, Projects, Teams, Focus, Talent and Teamwork Graph toolsets, which belong to
+  sibling Atlassian products and are not enumerated in this Jira record.
+schemas_available: false
+schemas_note: |
+  inputSchema values are not recorded here. tools/list is OAuth-gated (HTTP 401 anonymously), so the
+  real schemas require an authenticated introspection against a Jira Cloud tenant. The REST
+  operations each tool most likely binds to are recorded in mcp/atlassian-jira-tool-crosswalk.yml,
+  where the OpenAPI parameters and requestBody stand in for the tool's real inputSchema.
+docs:
+- https://www.atlassian.com/platform/remote-mcp-server
+- https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/
+- https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/
+repository: https://github.com/atlassian/atlassian-mcp-server
+third_party_note: |
+  The npm package `atlassian-mcp-server` (latest 1.0.1, 2025-12-12) is NOT Atlassian's — it is
+  published by the `teo-lin` account from github.com/teo-lin/multi-llm-mcps and is recorded here only
+  so it is not mistaken for a first-party stdio distribution. Atlassian ships no first-party stdio
+  MCP package; the product is the hosted endpoint above.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

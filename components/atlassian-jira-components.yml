@@ -1,0 +1,64 @@
+specification: API Commons Components
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Searched atlassian.design and the Forge UI Kit documentation 2026-09-06; package versions read from
+  registry.npmjs.org the same day. These are client-side UI component libraries a developer embeds in
+  or alongside Jira — distinct from the REST SDKs recorded in packages/.
+families:
+- name: Atlassian Design System (Atlaskit)
+  official: true
+  docs: https://atlassian.design/
+  description: |
+    The open-source React component library, design tokens and icon set used to build the Atlassian
+    products themselves. Apps rendered inside Jira use it so they look native. Distributed as many
+    individually versioned @atlaskit/* npm packages rather than one bundle.
+  distribution: npm
+  scope: '@atlaskit/*'
+  loader: React component imports; no CDN script tag.
+  representative_package:
+    name: '@atlaskit/button'
+    registry: npm
+    version: 25.3.2
+    published: '2026-09-02'
+- name: Forge UI Kit
+  official: true
+  docs: https://developer.atlassian.com/platform/forge/ui-kit/components/
+  description: |
+    The declarative component set for Forge apps. Components are described by the app and rendered by
+    Atlassian inside the Jira page, so the app never ships its own DOM. This is the hosted/prebuilt
+    surface for extending Jira.
+  distribution: npm
+  packages:
+  - name: '@forge/react'
+    registry: npm
+    version: 12.1.3
+    published: '2026-08-31'
+    role: UI Kit React reconciler.
+  - name: '@forge/bridge'
+    registry: npm
+    version: 6.3.1
+    published: '2026-08-31'
+    role: Bridge between a Forge Custom UI iframe and the Jira page — invoke, requestJira, router,
+      view and modal APIs.
+  - name: '@forge/resolver'
+    registry: npm
+    version: 2.0.0
+    published: '2026-06-22'
+    role: Server-side resolver that backs UI Kit and Custom UI calls.
+- name: Atlassian Connect iframe modules
+  official: true
+  docs: https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect/
+  description: |
+    The older extension model: an app declares iframe modules in its descriptor, Jira renders them in
+    defined page locations, and the app calls back over REST with a JWT. Still supported alongside Forge.
+  distribution: descriptor
+embedded_dashboards: false
+embedded_dashboards_note: Jira publishes no embeddable analytics/dashboard widget for third-party
+  sites; dashboards are surfaces inside the product, reachable over REST via getAllDashboards.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,263 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Versioning, deprecation policy, changelog and status page searched on the Atlassian developer and
+  trust surfaces 2026-09-06. Deprecated operations below are read straight from the `deprecated: true`
+  flags in the first-party OpenAPI definitions harvested the same day — not from prose.
+versioning:
+  style: path
+  current: '3'
+  pattern: /rest/api/{version}
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+deprecation_policy:
+  published: true
+  url: https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy/
+  notice_period: P6M
+  detail: |
+    Atlassian's REST API policy commits to keeping any deprecated cloud REST API available in its
+    original form for at least six months, with a stated exception for critical security
+    vulnerabilities, critical reliability issues and data-integrity issues, where the period may be
+    shortened. Deprecations are announced with a removal date in the developer changelog before they
+    take effect.
+  sunset_header: unknown
+  sunset_header_note: |
+    Atlassian publishes deprecation dates in the changelog and in the API reference rather than in
+    RFC 8594 Sunset / Deprecation response headers. No Sunset or Deprecation header appears in any of
+    the three harvested specifications, and none was observed on a live response.
+changelog:
+  url: https://developer.atlassian.com/changelog/
+  status: 200
+  detail: changelog/atlassian-jira-changelog.yml
+status_page:
+  url: https://status.atlassian.com/
+  vendor: Atlassian Statuspage
+  api: https://status.atlassian.com/api/v2/summary.json
+sla:
+  published: true
+  uptime:
+  - plan: Premium
+    target: '99.9%'
+  - plan: Enterprise
+    target: '99.95%'
+  source: https://support.atlassian.com/jira-cloud-administration/docs/explore-jira-cloud-plans/
+  note: Free and Standard plans carry no published uptime SLA.
+deprecated_operations:
+- operationId: evaluateJiraExpression
+  spec: platform
+  method: POST
+  path: /rest/api/3/expression/eval
+  evidence: openapi deprecated:true
+- operationId: getDefaultValues
+  spec: platform
+  method: GET
+  path: /rest/api/3/field/{fieldId}/context/defaultValue
+  evidence: openapi deprecated:true
+- operationId: setDefaultValues
+  spec: platform
+  method: PUT
+  path: /rest/api/3/field/{fieldId}/context/defaultValue
+  evidence: openapi deprecated:true
+- operationId: getContextsForFieldDeprecated
+  spec: platform
+  method: GET
+  path: /rest/api/3/field/{fieldId}/contexts
+  evidence: openapi deprecated:true
+- operationId: getAllFieldConfigurations
+  spec: platform
+  method: GET
+  path: /rest/api/3/fieldconfiguration
+  evidence: openapi deprecated:true
+- operationId: createFieldConfiguration
+  spec: platform
+  method: POST
+  path: /rest/api/3/fieldconfiguration
+  evidence: openapi deprecated:true
+- operationId: deleteFieldConfiguration
+  spec: platform
+  method: DELETE
+  path: /rest/api/3/fieldconfiguration/{id}
+  evidence: openapi deprecated:true
+- operationId: updateFieldConfiguration
+  spec: platform
+  method: PUT
+  path: /rest/api/3/fieldconfiguration/{id}
+  evidence: openapi deprecated:true
+- operationId: getFieldConfigurationItems
+  spec: platform
+  method: GET
+  path: /rest/api/3/fieldconfiguration/{id}/fields
+  evidence: openapi deprecated:true
+- operationId: updateFieldConfigurationItems
+  spec: platform
+  method: PUT
+  path: /rest/api/3/fieldconfiguration/{id}/fields
+  evidence: openapi deprecated:true
+- operationId: getAllFieldConfigurationSchemes
+  spec: platform
+  method: GET
+  path: /rest/api/3/fieldconfigurationscheme
+  evidence: openapi deprecated:true
+- operationId: createFieldConfigurationScheme
+  spec: platform
+  method: POST
+  path: /rest/api/3/fieldconfigurationscheme
+  evidence: openapi deprecated:true
+- operationId: getFieldConfigurationSchemeMappings
+  spec: platform
+  method: GET
+  path: /rest/api/3/fieldconfigurationscheme/mapping
+  evidence: openapi deprecated:true
+- operationId: getFieldConfigurationSchemeProjectMapping
+  spec: platform
+  method: GET
+  path: /rest/api/3/fieldconfigurationscheme/project
+  evidence: openapi deprecated:true
+- operationId: assignFieldConfigurationSchemeToProject
+  spec: platform
+  method: PUT
+  path: /rest/api/3/fieldconfigurationscheme/project
+  evidence: openapi deprecated:true
+- operationId: deleteFieldConfigurationScheme
+  spec: platform
+  method: DELETE
+  path: /rest/api/3/fieldconfigurationscheme/{id}
+  evidence: openapi deprecated:true
+- operationId: updateFieldConfigurationScheme
+  spec: platform
+  method: PUT
+  path: /rest/api/3/fieldconfigurationscheme/{id}
+  evidence: openapi deprecated:true
+- operationId: setFieldConfigurationSchemeMapping
+  spec: platform
+  method: PUT
+  path: /rest/api/3/fieldconfigurationscheme/{id}/mapping
+  evidence: openapi deprecated:true
+- operationId: removeIssueTypesFromGlobalFieldConfigurationScheme
+  spec: platform
+  method: POST
+  path: /rest/api/3/fieldconfigurationscheme/{id}/mapping/delete
+  evidence: openapi deprecated:true
+- operationId: getGroup
+  spec: platform
+  method: GET
+  path: /rest/api/3/group
+  evidence: openapi deprecated:true
+- operationId: getCreateIssueMeta
+  spec: platform
+  method: GET
+  path: /rest/api/3/issue/createmeta
+  evidence: openapi deprecated:true
+- operationId: setLocale
+  spec: platform
+  method: PUT
+  path: /rest/api/3/mypreferences/locale
+  evidence: openapi deprecated:true
+- operationId: getPriorities
+  spec: platform
+  method: GET
+  path: /rest/api/3/priority
+  evidence: openapi deprecated:true
+- operationId: getAllProjects
+  spec: platform
+  method: GET
+  path: /rest/api/3/project
+  evidence: openapi deprecated:true
+- operationId: getResolutions
+  spec: platform
+  method: GET
+  path: /rest/api/3/resolution
+  evidence: openapi deprecated:true
+- operationId: searchForIssuesUsingJql
+  spec: platform
+  method: GET
+  path: /rest/api/3/search
+  evidence: openapi deprecated:true
+- operationId: searchForIssuesUsingJqlPost
+  spec: platform
+  method: POST
+  path: /rest/api/3/search
+  evidence: openapi deprecated:true
+- operationId: deleteVersion
+  spec: platform
+  method: DELETE
+  path: /rest/api/3/version/{id}
+  evidence: openapi deprecated:true
+- operationId: getWorkflowsPaginated
+  spec: platform
+  method: GET
+  path: /rest/api/3/workflow/search
+  evidence: openapi deprecated:true
+- operationId: getIssuesForBacklog
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/board/{boardId}/backlog
+  evidence: openapi deprecated:true
+- operationId: getIssuesWithoutEpicForBoard
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/board/{boardId}/epic/none/issue
+  evidence: openapi deprecated:true
+- operationId: getBoardIssuesForEpic
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/board/{boardId}/epic/{epicId}/issue
+  evidence: openapi deprecated:true
+- operationId: getIssuesForBoard
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/board/{boardId}/issue
+  evidence: openapi deprecated:true
+- operationId: getBoardIssuesForSprint
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/board/{boardId}/sprint/{sprintId}/issue
+  evidence: openapi deprecated:true
+- operationId: getIssuesWithoutEpic
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/epic/none/issue
+  evidence: openapi deprecated:true
+- operationId: getIssuesForEpic
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/epic/{epicIdOrKey}/issue
+  evidence: openapi deprecated:true
+- operationId: getIssuesForSprint
+  spec: software
+  method: GET
+  path: /rest/agile/1.0/sprint/{sprintId}/issue
+  evidence: openapi deprecated:true
+deprecated_operation_count: 37
+experimental_operation_count: 130
+experimental_note: |
+  115 platform operations and 15 Service Management operations carry x-experimental: true in the
+  harvested specs. Atlassian's REST API policy explicitly excludes experimental endpoints from the
+  six-month deprecation guarantee, so an integration that binds to one is unprotected.
+notable_deprecations:
+- name: Jira REST API v2
+  status: deprecated
+  replacement: /rest/api/3 (Atlassian Document Format bodies)
+  migration_guide: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+- name: Basic authentication with passwords and cookie-based authentication
+  status: removed
+  replacement: API tokens over HTTP Basic, or OAuth 2.0 (3LO)
+  notice: https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-basic-auth-and-cookie-based-auth/
+- name: username and userKey identifiers
+  status: removed
+  replacement: accountId
+  notice: https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/
+- name: Non-paginated GET /rest/api/3/filter and GET /rest/api/3/project
+  status: deprecated
+  replacement: getFiltersPaginated / searchProjects
+  notice: https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-removal-of-get-filters-and-get-all-projects/
+docs:
+- https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy/
+- https://developer.atlassian.com/changelog/
+- https://status.atlassian.com/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

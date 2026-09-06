@@ -1,0 +1,174 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Searched npm, PyPI, Maven Central, Atlassian's own public Maven repository (packages.atlassian.com)
+  and the Atlassian developer documentation on 2026-09-06. Every `version` and `published` below was
+  read from the registry metadata endpoint on that date, not from a docs page. Third-party clients
+  that dominate real-world Jira integration are listed separately with official: false so they are
+  never mistaken for a first-party SDK.
+finding: |
+  Atlassian ships no first-party REST client SDK for Jira Cloud in any modern language registry. What
+  it publishes instead is app-platform tooling — the Forge runtime and CLI, and the Connect JWT helper
+  — which call Jira on an app's behalf. The most-used Jira REST clients (jira.js on npm, jira on PyPI)
+  are community projects. The one first-party REST client that does exist, the Java jira-rest-java-client,
+  is not on Maven Central and targets the Server/Data Center lineage.
+packages:
+- name: '@forge/api'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@forge/api
+  version: 8.0.5
+  published: '2026-08-31'
+  role: |
+    The Forge runtime's API surface. `api.asApp().requestJira()` and `api.asUser().requestJira()` call
+    the Jira REST API from inside a Forge function with the app's or the user's credentials — the
+    closest thing Atlassian ships to an official Jira client, but only usable inside Forge.
+- name: '@forge/cli'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@forge/cli
+  version: 13.5.0
+  published: '2026-08-31'
+  role: Command-line interface for building, deploying and installing Forge apps. See
+    cli/atlassian-jira-cli.yml.
+- name: '@forge/react'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@forge/react
+  version: 12.1.3
+  published: '2026-08-31'
+  role: Forge UI Kit React reconciler. See components/atlassian-jira-components.yml.
+- name: '@forge/bridge'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@forge/bridge
+  version: 6.3.1
+  published: '2026-08-31'
+  role: Custom UI bridge, including requestJira() for calling Jira from an app iframe.
+- name: '@forge/resolver'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@forge/resolver
+  version: 2.0.0
+  published: '2026-06-22'
+  role: Server-side resolver for Forge UI Kit and Custom UI.
+- name: atlassian-jwt
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/atlassian-jwt
+  repository: https://bitbucket.org/atlassian/atlassian-jwt-js
+  version: 2.0.3
+  published: '2023-12-13'
+  role: JWT implementation with Atlassian's query-string-hash claim, used by Atlassian Connect apps to
+    authenticate to Jira.
+  currency_note: |
+    Last published 2023-12-13 — nearly three years before this check, and before the Jira v2-to-v3 API
+    transition. It still works because the Connect JWT contract has not changed, but it is the oldest
+    first-party package in this record.
+- name: '@atlaskit/button'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@atlaskit/button
+  version: 25.3.2
+  published: '2026-09-02'
+  role: Representative package of the Atlassian Design System. Recorded here as the currency probe for
+    the @atlaskit/* scope, which contains hundreds of individually versioned components.
+- name: com.atlassian.jira:jira-rest-java-client-core
+  registry: maven
+  repository_url: https://packages.atlassian.com/maven-external/
+  official: true
+  language: java
+  version: 8.0.0-894d8cbg
+  published: null
+  published_note: |
+    Read from maven-metadata.xml at
+    https://packages.atlassian.com/maven-external/com/atlassian/jira/jira-rest-java-client-core/maven-metadata.xml
+    on 2026-09-06 (<latest> and <release> both 8.0.0-894d8cbg). The metadata document carries no
+    <lastUpdated> value that could be resolved to an ISO date on repeated fetches, so the publish date
+    is recorded as null rather than guessed.
+  currency_note: |
+    NOT on Maven Central — Atlassian serves it from its own repository, which means a consumer must add
+    packages.atlassian.com to their build before they can depend on it. It targets the Jira Server /
+    Data Center REST lineage rather than the Cloud v3 API described by the OpenAPI in this repo.
+- name: '@atlassian/jira'
+  registry: npm
+  official: true
+  language: javascript
+  url: https://www.npmjs.com/package/@atlassian/jira
+  repository: https://bitbucket.org/atlassianlabs/node-jira
+  version: 0.1.0
+  published: '2018-12-13'
+  status: abandoned
+  currency_note: |
+    Published once, in 2018, from Atlassian Labs and never updated. Predates the v3 API, Atlassian
+    Document Format, the accountId privacy migration and the removal of password Basic auth. It is
+    recorded here as an abandonment signal, not as a usable SDK — do not install it.
+third_party:
+- name: jira.js
+  registry: npm
+  official: false
+  language: typescript
+  url: https://www.npmjs.com/package/jira.js
+  repository: https://github.com/MrRefactoring/jira.js
+  version: 6.2.0
+  published: '2026-08-24'
+  note: The de-facto JavaScript/TypeScript Jira client. Actively maintained, but community-owned.
+- name: jira
+  registry: pypi
+  official: false
+  language: python
+  url: https://pypi.org/project/jira/
+  repository: https://github.com/pycontribs/jira
+  version: 3.10.5
+  published: '2025-07-28'
+  note: The pycontribs Jira library — the most widely used Python client. Community-owned; last release
+    over a year before this check.
+- name: atlassian-python-api
+  registry: pypi
+  official: false
+  language: python
+  url: https://pypi.org/project/atlassian-python-api/
+  repository: https://github.com/atlassian-api/atlassian-python-api
+  version: 5.0.4
+  published: '2026-08-28'
+  note: |
+    Named `atlassian-api` on GitHub and `atlassian-python-api` on PyPI, which reads as first-party and
+    is not — the maintainer of record is Matt Harasymczuk, not Atlassian. Actively maintained.
+- name: jira-client
+  registry: npm
+  official: false
+  language: javascript
+  url: https://www.npmjs.com/package/jira-client
+  version: 8.2.2
+  published: '2022-11-03'
+  note: Older community wrapper; last published 2022.
+- name: atlassian-mcp-server
+  registry: npm
+  official: false
+  language: javascript
+  url: https://www.npmjs.com/package/atlassian-mcp-server
+  repository: https://github.com/teo-lin/multi-llm-mcps
+  version: 1.0.1
+  published: '2025-12-12'
+  note: |
+    Not Atlassian's, despite the name. Atlassian's MCP product is the hosted endpoint recorded in
+    mcp/atlassian-jira-mcp.yml; it ships no first-party stdio MCP package.
+official_package_count: 9
+third_party_package_count: 5
+docs:
+- https://developer.atlassian.com/platform/forge/
+- https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -42,7 +42,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/atlassian-jira/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-04-19'
+modified: '2026-09-06'
 specificationVersion: '0.23'
 apis:
 - aid: atlassian-jira:atlassian-jira-fields-api
@@ -193,6 +193,80 @@ apis:
     url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
   - type: Documentation
     url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-cloud-platform-api
+  name: Atlassian Jira Cloud Platform REST API v3
+  description: The complete first-party Jira Cloud platform REST API — 617 operations across 421 paths
+    covering issues, projects, users, workflows, fields, screens, permissions, dashboards, filters,
+    webhooks and administration. Harvested verbatim from Atlassian's own published OpenAPI definition.
+  humanURL: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  baseURL: https://your-domain.atlassian.net
+  tags:
+  - Issue Tracking
+  - Project Management
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-platform-openapi.json
+  - type: Overlay
+    url: overlays/atlassian-jira-platform-overlay.yaml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/
+  - type: Authentication
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+- aid: atlassian-jira:atlassian-jira-software-cloud-api
+  name: Jira Software Cloud API
+  description: The first-party Jira Software (Agile) REST API at /rest/agile/1.0 — 105 operations
+    covering boards, sprints, epics, backlogs, versions, and the development-information surface for
+    builds, deployments, feature flags and remote links. Harvested verbatim from Atlassian.
+  humanURL: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+  baseURL: https://your-domain.atlassian.net
+  tags:
+  - Agile
+  - Scrum
+  - Kanban
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-software-openapi.json
+  - type: Overlay
+    url: overlays/atlassian-jira-software-overlay.yaml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/software/rest/intro/
+- aid: atlassian-jira:atlassian-jira-service-management-api
+  name: Jira Service Management REST API
+  description: The first-party Jira Service Management REST API at /rest/servicedeskapi — 75 operations
+    covering service desks, customer requests, request types, queues, SLAs, organizations, customers
+    and the knowledge base. Harvested verbatim from Atlassian.
+  humanURL: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+  baseURL: https://your-domain.atlassian.net
+  tags:
+  - ITSM
+  - Service Desk
+  properties:
+  - type: OpenAPI
+    url: openapi/atlassian-jira-service-management-openapi.json
+  - type: Overlay
+    url: overlays/atlassian-jira-service-management-overlay.yaml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/
+- aid: atlassian-jira:atlassian-jira-remote-mcp-server
+  name: Atlassian Remote MCP Server
+  description: Atlassian's official hosted Model Context Protocol server. An OAuth 2.1 protected
+    endpoint that exposes Jira, Jira Service Management, Confluence, Bitbucket, Compass and Loom to
+    MCP-capable AI clients, with 50 named Jira and JSM tools across read, write, search, delete and
+    manage toolsets.
+  humanURL: https://www.atlassian.com/platform/remote-mcp-server
+  baseURL: https://mcp.atlassian.com/v1/mcp/authv2
+  tags:
+  - MCP
+  - AI Agents
+  properties:
+  - type: MCPServer
+    url: mcp/atlassian-jira-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/atlassian-jira-tool-crosswalk.yml
+  - type: Documentation
+    url: https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/
 common:
   - type: AgenticAccess
     url: agentic-access/atlassian-jira-agentic-access.yml
@@ -207,7 +281,7 @@ common:
   - type: OAuthScopes
     url: scopes/atlassian-jira-scopes.yml
   - type: LinkedIn
-    url: https://www.linkedin.com/showcase/atlassian-jira
+    url: https://www.linkedin.com/company/atlassian
   - type: Website
     url: https://www.atlassian.com/software/jira
   - type: Documentation
@@ -282,6 +356,81 @@ common:
       description: Provide enterprise ITSM with service catalogs, SLAs, queues, and approval workflows via Jira Service Management.
     - name: Business Process Tracking
       description: Track any business process or workflow using customizable Jira projects and issue types for non-software teams.
+  - type: Packages
+    url: packages/atlassian-jira-packages.yml
+  - type: SDKs
+    url: packages/atlassian-jira-packages.yml
+  - type: CLI
+    url: cli/atlassian-jira-cli.yml
+  - type: Components
+    url: components/atlassian-jira-components.yml
+  - type: WellKnown
+    url: well-known/atlassian-jira-well-known.yml
+  - type: SecurityTxt
+    url: well-known/atlassian-jira-security.txt
+  - type: LLMsTxt
+    url: llms/atlassian-jira-llms.txt
+  - type: MCPServer
+    url: mcp/atlassian-jira-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/atlassian-jira-tool-crosswalk.yml
+  - type: Conformance
+    url: conformance/atlassian-jira-conformance.yml
+  - type: Compliance
+    url: https://www.atlassian.com/trust/compliance
+  - type: ErrorCatalog
+    url: errors/atlassian-jira-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/atlassian-jira-lifecycle.yml
+  - type: Deprecation
+    url: https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy/
+  - type: Conventions
+    url: conventions/atlassian-jira-conventions.yml
+  - type: ChangeLog
+    url: changelog/atlassian-jira-changelog.yml
+  - type: DataModel
+    url: data-model/atlassian-jira-data-model.yml
+  - type: Sandbox
+    url: sandbox/atlassian-jira-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/atlassian-jira-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Plans
+    url: plans/atlassian-jira-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/atlassian-jira-rate-limits.yml
+  - type: Security
+    url: security/atlassian-jira-vulnerability-disclosure.yml
+  - type: DeveloperPortal
+    url: https://developer.atlassian.com/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/
+  - type: Roadmap
+    url: https://www.atlassian.com/roadmap/cloud
+  - type: SignUp
+    url: https://www.atlassian.com/try/cloud/signup?bundle=jira-software
+  - type: HelpCenter
+    url: https://community.atlassian.com/
+  - type: Trust
+    url: https://www.atlassian.com/trust
+  - type: BugBounty
+    url: https://bugcrowd.com/atlassian
+  - type: Marketplace
+    url: https://marketplace.atlassian.com/
+  - type: PostmanCollection
+    url: collections/atlassian-jira.postman_collection.json
+  - type: OpenCollection
+    url: collections/atlassian-jira.opencollection.json
+  - type: FinOps
+    url: finops/atlassian-jira-finops.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 35
+  pass: local-v3
+x-parent: atlassian
+x-relationship: product

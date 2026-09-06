@@ -1,36 +1,1836 @@
-generated: '2026-07-11'
+generated: '2026-09-06'
 method: derived
-source: openapi/atlassian-jira-openapi.yml
+source: openapi/atlassian-jira-fields-api-openapi.yml, openapi/atlassian-jira-issue-comments-api-openapi.yml,
+  openapi/atlassian-jira-issue-search-api-openapi.yml, openapi/atlassian-jira-issue-transitions-api-openapi.yml,
+  openapi/atlassian-jira-issue-worklogs-api-openapi.yml, openapi/atlassian-jira-issues-api-openapi.yml,
+  openapi/atlassian-jira-platform-openapi.json, openapi/atlassian-jira-projects-api-openapi.yml,
+  openapi/atlassian-jira-service-management-openapi.json, openapi/atlassian-jira-software-openapi.json,
+  openapi/atlassian-jira-users-api-openapi.yml
 schemes:
 - name: OAuth2
-  source: openapi/atlassian-jira-openapi.yml
+  source: openapi/atlassian-jira-fields-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-issue-comments-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-issue-search-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-issues-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-platform-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: OAuth2 scopes for Jira
+- name: OAuth2
+  source: openapi/atlassian-jira-projects-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
+- name: OAuth2
+  source: openapi/atlassian-jira-service-management-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: OAuth2 scopes for Jira
+- name: OAuth2
+  source: openapi/atlassian-jira-software-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/oauth/token
+  description: OAuth2 scopes for Jira
+- name: OAuth2
+  source: openapi/atlassian-jira-users-api-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://auth.atlassian.com/authorize
     tokenUrl: https://auth.atlassian.com/oauth/token
   description: Atlassian OAuth 2.0 (3LO) for Jira Cloud.
 scopes:
+- scope: delete:async-task:jira
+  description: Delete asynchronous task.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:attachment:jira
+  description: Delete issue attachments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:avatar:jira
+  description: Delete system and custom avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:board-scope.admin:jira-software
+  description: Remove board configuration, features, and properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:build-info:jira
+  description: Delete build information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:comment.property:jira
+  description: Delete issue comment properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:comment:jira
+  description: Delete issue comments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:dashboard.property:jira
+  description: Delete dashboard properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:dashboard:jira
+  description: Delete dashboards.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:deployment-info:jira
+  description: Delete deployment information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:dev-info:jira
+  description: Delete development information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:feature-flag-info:jira
+  description: Delete feature flag information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:field-configuration-scheme:jira
+  description: Delete field configuration schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:field-configuration:jira
+  description: Delete field configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:field.option:jira
+  description: Delete field options.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:field:jira
+  description: Delete fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:filter.column:jira
+  description: Delete filter columns.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:filter:jira
+  description: Delete filters.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:group:jira
+  description: Delete user groups.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-link-type:jira
+  description: Delete issue link types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-link:jira
+  description: Delete issue links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-type-scheme:jira
+  description: Delete issue type schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-type-screen-scheme:jira
+  description: Delete issue type screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-type.property:jira
+  description: Delete issue type properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-type:jira
+  description: Delete issue types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-worklog.property:jira
+  description: Delete issue worklog properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue-worklog:jira
+  description: Delete issue worklogs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue.property:jira
+  description: Delete issue properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue.remote-link:jira
+  description: Delete issue remote links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:issue:jira
+  description: Delete issues.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:organization.property:jira-service-management
+  description: Allows the app to delete organisation entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:organization.user:jira-service-management
+  description: Allows the app to remove members from organisations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:organization:jira-service-management
+  description: Allows the app to delete organisations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:permission-scheme:jira
+  description: Delete permission schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:permission:jira
+  description: Delete permissions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project-category:jira
+  description: Delete project categories.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project-role:jira
+  description: Delete project roles.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project-version:jira
+  description: Delete project versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project.avatar:jira
+  description: Delete project avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project.component:jira
+  description: Delete project components.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project.property:jira
+  description: Delete project properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:project:jira
+  description: Delete projects and their details, such as issue types, project lead, and avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:remote-link-info:jira
+  description: Delete remote link information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:request.feedback:jira-service-management
+  description: Allows the app to remove feedback data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:request.notification:jira-service-management
+  description: Allows the app to remove the subscription status of the user from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:request.participant:jira-service-management
+  description: Allows the app to remove participants (user) data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:requesttype.property:jira-service-management
+  description: Allows the app to delete request type entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:screen-scheme:jira
+  description: Delete screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:screen-tab:jira
+  description: Delete screen tabs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:screen:jira
+  description: Delete screens.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:screenable-field:jira
+  description: Delete screenable fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:security:jira
+  description: Delete security information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:servicedesk.customer:jira-service-management
+  description: Allows the app the delete customers from service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:servicedesk.organization:jira-service-management
+  description: Allows the app the delete organisations from service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:servicedesk.property:jira-service-management
+  description: Allows the app to delete service desk entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: delete:sprint:jira-software
+  description: Delete sprints and their properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: delete:user-configuration:jira
+  description: Delete user configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:user.property:jira
+  description: Delete user properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:webhook:jira
+  description: Delete webhooks.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:workflow-scheme:jira
+  description: Delete workflow schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:workflow.property:jira
+  description: Delete workflow properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: delete:workflow:jira
+  description: Delete workflows.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: manage:jira-configuration
+  description: Configure Jira settings that require the Jira administrators permission, for
+    example, create projects and custom fields, view workflows, manage issue link types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
 - scope: manage:jira-project
   description: Manage Jira projects
   flows:
   - authorizationCode
   sources:
-  - openapi/atlassian-jira-openapi.yml
+  - openapi/atlassian-jira-fields-api-openapi.yml
+  - openapi/atlassian-jira-issue-comments-api-openapi.yml
+  - openapi/atlassian-jira-issue-search-api-openapi.yml
+  - openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  - openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  - openapi/atlassian-jira-issues-api-openapi.yml
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-projects-api-openapi.yml
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+  - openapi/atlassian-jira-users-api-openapi.yml
+- scope: manage:jira-webhook
+  description: Manage Jira webhooks. Enables an OAuth app to register and unregister dynamic
+    webhooks in Jira. It also provides for fetching of registered webhooks.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+- scope: manage:servicedesk-customer
+  description: Manage Jira Service Management customers and organizations | Create, manage and
+    delete customers and organizations.<br>Add and remove customers and organizations from service
+    desks.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:app-data:jira
+  description: Read app data.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:application-role:jira
+  description: View application roles.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:attachment:jira
+  description: View issue attachments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:audit-log:jira
+  description: View audit logs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:avatar:jira
+  description: View system and custom avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:board-scope.admin:jira-software
+  description: View configuration, features, filters, project, properties and quick filters
+    related to the given board.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:board-scope:jira-software
+  description: View board and issues from a board, view issues from a backlog and view reports
+    and versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:build-info:jira
+  description: Read build information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:build:jira-software
+  description: View builds.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:comment.property:jira
+  description: View issue comment properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:comment:jira
+  description: View issue comments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:custom-field-contextual-configuration:jira
+  description: Read custom field contextual configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:customer:jira-service-management
+  description: Allows the app to read customer accounts information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:dashboard.property:jira
+  description: View dashboard properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:dashboard:jira
+  description: View dashboards.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:deployment-info:jira
+  description: Read deployment information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:deployment:jira-software
+  description: View deployments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:dev-info:jira
+  description: Read development information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:email-address:jira
+  description: View email addresses of all users regardless of the user's profile visibility
+    settings.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:epic:jira-software
+  description: View and search for epics, view issues related to an epic and issues without
+    an epic.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:feature-flag-info:jira
+  description: Read feature flag information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:feature-flag:jira-software
+  description: View feature flags.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:field-configuration-scheme:jira
+  description: View field configuration schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:field-configuration:jira
+  description: Read field configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:field.default-value:jira
+  description: View field default values.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:field.option:jira
+  description: View field options.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:field.options:jira
+  description: Read field options.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:field:jira
+  description: View fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:filter.column:jira
+  description: View filter columns.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:filter.default-share-scope:jira
+  description: View filter default share scopes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:filter:jira
+  description: View filters.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:group:jira
+  description: View user groups.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:instance-configuration:jira
+  description: View instance configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-details:jira
+  description: View issue details.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:issue-event:jira
+  description: Read issue events.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-field-values:jira
+  description: View issue field valueses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-link-type:jira
+  description: View issue link types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-link:jira
+  description: View issue links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-meta:jira
+  description: View issue meta.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-security-level:jira
+  description: View issue security levels.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-security-scheme:jira
+  description: View issue security schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-status:jira
+  description: View issue statuses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-type-hierarchy:jira
+  description: Read issue type hierarchies.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-type-scheme:jira
+  description: View issue type schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-type-screen-scheme:jira
+  description: View issue type screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-type.property:jira
+  description: View issue type properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-type:jira
+  description: View issue types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-worklog.property:jira
+  description: View issue worklog properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue-worklog:jira
+  description: View issue worklogs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.changelog:jira
+  description: View issue changelogs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.property:jira
+  description: View issue properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.remote-link:jira
+  description: View issue remote links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.time-tracking:jira
+  description: View issue time trackings.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.transition:jira
+  description: View issue transitions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.vote:jira
+  description: View issue votes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.votes:jira
+  description: View issue voteses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue.watcher:jira
+  description: View issue watchers.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue:jira
+  description: View issues.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:issue:jira-software
+  description: View issues, issue estimations and field used for estimations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:jira-expressions:jira
+  description: View jira expressions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
 - scope: read:jira-user
   description: Read Jira user
   flows:
   - authorizationCode
   sources:
-  - openapi/atlassian-jira-openapi.yml
+  - openapi/atlassian-jira-fields-api-openapi.yml
+  - openapi/atlassian-jira-issue-comments-api-openapi.yml
+  - openapi/atlassian-jira-issue-search-api-openapi.yml
+  - openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  - openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  - openapi/atlassian-jira-issues-api-openapi.yml
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-projects-api-openapi.yml
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+  - openapi/atlassian-jira-users-api-openapi.yml
 - scope: read:jira-work
   description: Read Jira work
   flows:
   - authorizationCode
   sources:
-  - openapi/atlassian-jira-openapi.yml
+  - openapi/atlassian-jira-fields-api-openapi.yml
+  - openapi/atlassian-jira-issue-comments-api-openapi.yml
+  - openapi/atlassian-jira-issue-search-api-openapi.yml
+  - openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  - openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  - openapi/atlassian-jira-issues-api-openapi.yml
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-projects-api-openapi.yml
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+  - openapi/atlassian-jira-users-api-openapi.yml
+- scope: read:jql:jira
+  description: View JQL.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:knowledgebase:jira-service-management
+  description: Allows the app to search and list KB articles
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:label:jira
+  description: View labels.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:license:jira
+  description: View licenses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:mail-logs.connectivity:jira-service-management
+  description: Allows the app to read email connectivity logs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:mail-logs.processing:jira-service-management
+  description: Allows the app to read incoming email processing logs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:notification-scheme:jira
+  description: View notification schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:organization.property:jira-service-management
+  description: Allows the app to read organisation entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:organization.user:jira-service-management
+  description: Allows the app to read organisation membership information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:organization:jira-service-management
+  description: Allows the app to read organisation information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:permission-scheme:jira
+  description: View permission schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:permission:jira
+  description: View permissions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:priority:jira
+  description: View priorities.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project-category:jira
+  description: View project categories.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project-role:jira
+  description: View project roles.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project-type:jira
+  description: View project types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project-version:jira
+  description: View project versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project.avatar:jira
+  description: Read project avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project.component:jira
+  description: View project components.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project.email:jira
+  description: View project emails.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project.feature:jira
+  description: Read project features.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project.property:jira
+  description: View project properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:project:jira
+  description: View projects.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:queue:jira-service-management
+  description: Allows the app to list queues
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:remote-link-info:jira
+  description: Read remote link information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:remote-link:jira-software
+  description: View remote links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:request.action:jira-service-management
+  description: Allows the app to read which actions can be performed on requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.approval:jira-service-management
+  description: Allows the app to read approval data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.attachment:jira-service-management
+  description: Allows the app to read attachment data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.comment:jira-service-management
+  description: Allows the app to read comment data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.feedback:jira-service-management
+  description: Allows the app to read feedback data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.notification:jira-service-management
+  description: Allows the app to read the subscription status of the user for requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.participant:jira-service-management
+  description: Allows the app to read participant (user) data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.sla:jira-service-management
+  description: Allows the app to read SLA data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request.status:jira-service-management
+  description: Allows the app to read status/transition data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:request:jira-service-management
+  description: Allows the app to list & search requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:requesttype.property:jira-service-management
+  description: Allows the app to read request type desk entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:requesttype:jira-service-management
+  description: Allows the app to list & search request types
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:resolution:jira
+  description: View resolutions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:role:jira
+  description: View roles.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:screen-field:jira
+  description: View screen fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:screen-scheme:jira
+  description: View screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:screen-tab:jira
+  description: View screen tabs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:screen:jira
+  description: View screens.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:screenable-field:jira
+  description: View screenable fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:security:jira
+  description: Read security information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:servicedesk-request
+  description: Read customer request data, including approvals, attachments, comments, request
+    participants, and status/transitions.<br>Read service desk and request types, including
+    searching for request types and reading request type fields, properties and groups.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:servicedesk.customer:jira-service-management
+  description: Allows the app the list customers of service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:servicedesk.organization:jira-service-management
+  description: Allows the app to list organisations to service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:servicedesk.property:jira-service-management
+  description: Allows the app to read service desk entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:servicedesk:jira-service-management
+  description: Allows the app to list & search service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:source-code:jira-software
+  description: View repositories and check if data exists for the supplied properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:sprint:jira-software
+  description: View sprints and sprint related issues and properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: read:status:jira
+  description: View statuses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:user-configuration:jira
+  description: View user configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:user.columns:jira
+  description: View user columnses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:user.property:jira
+  description: View user properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:user:jira
+  description: View users.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: read:webhook:jira
+  description: View webhooks.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:workflow-scheme:jira
+  description: View workflow schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:workflow.property:jira
+  description: View workflow properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: read:workflow:jira
+  description: View workflows.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: send:notification:jira
+  description: Send notifications.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: validate:jql:jira
+  description: Validate JQL.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:app-data:jira
+  description: Write app data.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:attachment:jira
+  description: Create and update issue attachments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:avatar:jira
+  description: Create and update system and custom avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:board-scope.admin:jira-software
+  description: Create board, toggle features and set and delete properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:board-scope:jira-software
+  description: Move issues to a backlog and move issues from a backlog to a board.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:build-info:jira
+  description: Write build information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:build:jira-software
+  description: Submit and delete build.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:comment.property:jira
+  description: Create and update issue comment properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:comment:jira
+  description: Create and update issue comments.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:custom-field-contextual-configuration:jira
+  description: Save custom field contextual configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:customer:jira-service-management
+  description: Allows the app to create customer accounts (user)
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:dashboard.property:jira
+  description: Create and update dashboard properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:dashboard:jira
+  description: Create and update dashboards.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:deployment-info:jira
+  description: Write deployment information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:deployment:jira-software
+  description: Submit and delete deployment.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:dev-info:jira
+  description: Write development information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:epic:jira-software
+  description: Remove issues from epic, move issues to epic, rank epics and partially update
+    epics. A partial update means that fields not present in the request JSON will not be updated.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:feature-flag-info:jira
+  description: Write feature flag information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:feature-flag:jira-software
+  description: Submit and delete feature flag.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:field-configuration-scheme:jira
+  description: Create and update field configuration schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:field-configuration:jira
+  description: Save field configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:field.default-value:jira
+  description: Create and update field default values.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:field.option:jira
+  description: Create and update field options.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:field:jira
+  description: Create and update fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:filter.column:jira
+  description: Create and update filter columns.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:filter.default-share-scope:jira
+  description: Create and update filter default share scopes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:filter:jira
+  description: Create and update filters.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:group:jira
+  description: Create and update user groups.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:instance-configuration:jira
+  description: Create and update instance configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-link-type:jira
+  description: Create and update issue link types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-link:jira
+  description: Create and update issue links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-type-scheme:jira
+  description: Create and update issue type schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-type-screen-scheme:jira
+  description: Create and update issue type screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-type.property:jira
+  description: Create and update issue type properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-type:jira
+  description: Create and update issue types.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-worklog.property:jira
+  description: Create and update issue worklog properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue-worklog:jira
+  description: Create and update issue worklogs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue.property:jira
+  description: Create and update issue properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue.remote-link:jira
+  description: Create and update issue remote links.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue.time-tracking:jira
+  description: Create and update issue time trackings.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue.vote:jira
+  description: Create and update issue votes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue.watcher:jira
+  description: Create and update issue watchers.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue:jira
+  description: Create and update issues.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:issue:jira-software
+  description: Move (rank) issues and update estimation of the issue.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
 - scope: write:jira-work
   description: Write Jira work
   flows:
   - authorizationCode
   sources:
-  - openapi/atlassian-jira-openapi.yml
+  - openapi/atlassian-jira-fields-api-openapi.yml
+  - openapi/atlassian-jira-issue-comments-api-openapi.yml
+  - openapi/atlassian-jira-issue-search-api-openapi.yml
+  - openapi/atlassian-jira-issue-transitions-api-openapi.yml
+  - openapi/atlassian-jira-issue-worklogs-api-openapi.yml
+  - openapi/atlassian-jira-issues-api-openapi.yml
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-projects-api-openapi.yml
+  - openapi/atlassian-jira-service-management-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+  - openapi/atlassian-jira-users-api-openapi.yml
+- scope: write:organization.property:jira-service-management
+  description: Allows the app to write organisation entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:organization.user:jira-service-management
+  description: Allows the app to add members to organisations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:organization:jira-service-management
+  description: Allows the app to create organisations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:permission-scheme:jira
+  description: Create and update permission schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:permission:jira
+  description: Create and update permissions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project-category:jira
+  description: Create and update project categories.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project-role:jira
+  description: Create and update project roles.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project-version:jira
+  description: Create and update project versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project.avatar:jira
+  description: Create and update project avatars.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project.component:jira
+  description: Create and update project components.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project.email:jira
+  description: Create and update project emails.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project.feature:jira
+  description: Save project features.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project.property:jira
+  description: Create and update project properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:project:jira
+  description: Create and update projects.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:remote-link-info:jira
+  description: Write remote link information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:remote-link:jira-software
+  description: Submit and delete remote link.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:request.approval:jira-service-management
+  description: Allows the app to act on approvals of requests (e.g approve, deny, …)
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.attachment:jira-service-management
+  description: Allows the app to add attachments to requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.comment:jira-service-management
+  description: Allows the app to add comments to requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.feedback:jira-service-management
+  description: Allows the app to write feedback data on requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.notification:jira-service-management
+  description: Allows the app to change the subscription status of the user for requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.participant:jira-service-management
+  description: Allows the app to add participants (user) data from requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request.status:jira-service-management
+  description: Allows the app to execute transitions on requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:request:jira-service-management
+  description: Allows the app to create requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:requesttype.property:jira-service-management
+  description: Allows the app to write request type entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:requesttype:jira-service-management
+  description: Allows the app to create or modify request types
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:screen-scheme:jira
+  description: Create and update screen schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:screen-tab:jira
+  description: Create and update screen tabs.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:screen:jira
+  description: Create and update screens.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:screenable-field:jira
+  description: Create and update screenable fields.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:security:jira
+  description: Write security information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:servicedesk-request
+  description: Create and manage Jira Service Management requests | Create and edit customer
+    requests, including add comments and attachments, approve, share (add request participants),
+    subscribe, and transition.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:servicedesk.customer:jira-service-management
+  description: Allows the app the add customers to service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:servicedesk.organization:jira-service-management
+  description: Allows the app the add organisations to service desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:servicedesk.property:jira-service-management
+  description: Allows the app to write service desk entity properties
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:servicedesk:jira-service-management
+  description: Allows the app the add organisations, customers and request types to service
+    desks
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-service-management-openapi.json
+- scope: write:source-code:jira-software
+  description: Store and delete development information, delete repository and delete development
+    information entity.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:sprint:jira-software
+  description: Save, move issues to sprints, and change the order of sprints.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-software-openapi.json
+- scope: write:user-configuration:jira
+  description: Create and update user configurations.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:user.property:jira
+  description: Create and update user properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:webhook:jira
+  description: Create and update webhooks.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:workflow-scheme:jira
+  description: Create and update workflow schemes.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:workflow.property:jira
+  description: Create and update workflow properties.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json
+- scope: write:workflow:jira
+  description: Create and update workflows.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/atlassian-jira-platform-openapi.json

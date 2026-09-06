@@ -1,0 +1,51 @@
+specification: API Commons ChangeLog
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: https://developer.atlassian.com/changelog/
+url: https://developer.atlassian.com/changelog/
+status: 200
+scheme:
+  dated: true
+  identifier_format: CHANGE-####
+  filterable_by: [product, change type]
+  feed: |
+    The changelog exposes an RSS feed that carries whatever filters the reader has selected, so a
+    consumer can subscribe to Jira-platform changes only. Atlassian documents piping it into Slack with
+    the RSS app. No single static feed URL is published on the index page, and the common guesses
+    (/changelog/feed.xml, /changelog/rss.xml, /changelog/feed) all returned 404 when probed 2026-09-06 —
+    the URL is generated from the on-page filter state.
+  change_types:
+  - announcement
+  - deprecation notice
+  - new feature
+  - action required
+current_version: '3'
+current_version_note: The REST API version is a path segment (/rest/api/3); Atlassian does not publish
+  a dated release version for the API itself, so the changelog is the only per-change record.
+entries:
+- date: '2026-08-28'
+  type: announcement
+  product: REST API - Jira Cloud platform
+  title: Bulk fetch issues now supports up to 1000 issues per request
+  breaking: false
+  additions: true
+  highlights: |
+    POST /rest/api/3/issue/bulkfetch raised from 100 to 1000 issues per request, subject to field
+    constraints stated in the notice. Backing operationId in the harvested spec: bulkFetchIssues.
+- date: '2026-08-26'
+  type: announcement
+  product: REST API - Jira Cloud platform
+  title: Global statuses are now available in team-managed workflows
+  breaking: false
+  additions: true
+  highlights: Workflow create and update APIs accept site-wide statuses in team-managed projects.
+entries_note: |
+  Only entries read directly off the changelog index on 2026-09-06 are recorded. The window is
+  deliberately recent; this is a pointer to a live, filterable changelog, not a mirror of it.
+related_deprecations: lifecycle/atlassian-jira-lifecycle.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

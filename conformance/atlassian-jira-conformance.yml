@@ -1,0 +1,175 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Standards assertions checked against the first-party Atlassian OpenAPI definitions harvested
+  2026-09-06, the discovery documents probed at auth.atlassian.com and mcp.atlassian.com the same day,
+  and the Atlassian trust/compliance pages. Every `conforms: true` below carries a URL that was
+  actually fetched or a spec location that was actually read. Nothing is asserted from marketing prose.
+conformance:
+- id: openapi
+  name: OpenAPI Specification
+  version: 3.0.1
+  conforms: true
+  evidence: https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+  note: Atlassian publishes machine-readable OpenAPI 3.0.1 for all three Jira surfaces — 617 platform
+    operations, 105 Jira Software operations, 75 Jira Service Management operations.
+- id: oauth2
+  name: OAuth 2.0 Authorization Framework (RFC 6749)
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+  note: Authorization code (3LO) and client credentials grants; declared in every spec's
+    components.securitySchemes.
+- id: oauth2-pkce
+  name: PKCE (RFC 7636)
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+  note: code_challenge_methods_supported = [S256].
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+- id: rfc9126
+  name: OAuth 2.0 Pushed Authorization Requests
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+  note: pushed_authorization_request_endpoint = https://auth.atlassian.com/oauth/par
+- id: rfc7523
+  name: JWT Profile for OAuth 2.0 Client Authentication and Authorization Grants
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+  note: urn:ietf:params:oauth:grant-type:jwt-bearer in grant_types_supported; private_key_jwt in
+    token_endpoint_auth_methods_supported.
+- id: rfc8693
+  name: OAuth 2.0 Token Exchange
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/oauth-authorization-server
+  note: urn:ietf:params:oauth:grant-type:token-exchange in grant_types_supported.
+- id: oidc
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: https://auth.atlassian.com/.well-known/openid-configuration
+- id: rfc7591
+  name: OAuth 2.0 Dynamic Client Registration
+  conforms: true
+  evidence: https://mcp.atlassian.com/.well-known/oauth-authorization-server
+  note: registration_endpoint = https://mcp.atlassian.com/v1/register — used by MCP clients that
+    self-register before calling the remote MCP server.
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: https://mcp.atlassian.com/.well-known/oauth-protected-resource/v1/mcp/authv2
+  note: Returned by name in the WWW-Authenticate challenge on the MCP endpoint.
+- id: rfc9116
+  name: security.txt
+  conforms: true
+  evidence: https://www.atlassian.com/.well-known/security.txt
+  note: PGP-signed, with Contact, Policy, Encryption, Expires (2027-02-04), Canonical, Hiring and
+    Preferred-Languages.
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: https://mcp.atlassian.com/v1/mcp/authv2
+  note: First-party remote MCP server over streamable HTTP and SSE, OAuth 2.1 protected; probed
+    2026-09-06 and returned a conformant 401 OAuth challenge.
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: https://www.atlassian.com/llms.txt
+  note: 26KB provider-authored llms.txt at the registrable domain; saved verbatim to
+    llms/atlassian-jira-llms.txt.
+- id: pagination
+  name: Paginated collection responses
+  conforms: true
+  evidence: openapi/atlassian-jira-platform-openapi.json (PageBean startAt/maxResults/total/isLast;
+    nextPageToken cursor on /rest/api/3/search/jql)
+- id: webhooks
+  name: Outbound webhooks
+  conforms: true
+  evidence: https://developer.atlassian.com/cloud/jira/platform/webhooks/
+  note: Dynamic registration via POST /rest/api/3/webhook, HMAC signing via X-Hub-Signature.
+- id: websub
+  name: WebSub-style HMAC signature
+  conforms: true
+  evidence: https://developer.atlassian.com/cloud/jira/platform/webhooks/
+  note: Admin-registered webhooks sign the payload with a shared secret and deliver it in
+    X-Hub-Signature using the WebSub `method=signature` form.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: openapi/atlassian-jira-platform-openapi.json
+  note: No application/problem+json media type appears in any of the 967 error responses across the
+    three specs. Jira returns its own ErrorCollection envelope.
+- id: idempotency
+  name: Idempotency-Key on mutating requests
+  conforms: false
+  evidence: openapi/atlassian-jira-platform-openapi.json
+  note: No idempotency header, parameter or scheme appears anywhere in the three specs; a grep for
+    /idempoten/i over all three documents returns nothing.
+- id: rfc8594
+  name: Sunset and Deprecation HTTP headers
+  conforms: false
+  evidence: https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy/
+  note: Atlassian publishes a six-month deprecation policy and dated changelog entries, but no Sunset
+    or Deprecation response header is declared in the specs.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: https://developer.atlassian.com/cloud/jira/platform/webhooks/
+  note: A real event surface exists and is documented, but Atlassian publishes no AsyncAPI document
+    for it. Captured as a webhook catalog instead.
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: https://www.atlassian.com/.well-known/agent-card.json
+  note: 404 on every Atlassian host probed 2026-09-06 (atlassian.com, www, developer, api, auth, mcp),
+    on both the 0.3 and legacy paths.
+- id: graphql
+  name: GraphQL
+  conforms: partial
+  evidence: https://api.atlassian.com/graphql
+  note: Atlassian operates a GraphQL gateway, but it is authenticated — anonymous introspection was
+    not attempted and no SDL was captured. Recorded as a known gated surface, not as a conformance.
+- id: soc2
+  name: SOC 2
+  conforms: true
+  evidence: https://www.atlassian.com/trust/compliance
+- id: iso27001
+  name: ISO/IEC 27001
+  conforms: true
+  evidence: https://www.atlassian.com/trust/compliance
+- id: pci-dss
+  name: PCI DSS
+  conforms: true
+  evidence: https://www.atlassian.com/trust/compliance
+- id: fedramp
+  name: FedRAMP
+  conforms: true
+  evidence: https://www.atlassian.com/trust/compliance
+- id: gdpr
+  name: GDPR (data processing addendum)
+  conforms: true
+  evidence: https://www.atlassian.com/legal/data-processing-addendum
+domain_standards:
+  market: IT service management and software project management
+  assessment: |
+    Jira Service Management is marketed as ITIL-aligned, and ITIL 4 is the domain standard for this
+    market. ITIL is a practice framework, not a wire format: it defines no schema, URN, message type or
+    endpoint shape that a contract can declare, so there is nothing in the Service Management OpenAPI
+    that a machine could read as an ITIL conformance signal. No SCIM URN, OData $metadata surface,
+    OpenRTB, ActivityPub, LTI/OneRoster, OAI-PMH, HL7/X12/EDIFACT or ISO 20022 shape appears in any of
+    the three harvested specs either — checked by grepping the raw documents.
+  declared: []
+  note: |
+    REWARD-ONLY. This market has no machine-declarable domain standard for a work-tracking API, so no
+    domain_standard_conformance entry is asserted. Recording an ITIL claim here would be a prose
+    marketing claim dressed as a contract signal, which is exactly what the check is meant to exclude.
+docs:
+- https://www.atlassian.com/trust/compliance
+- https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

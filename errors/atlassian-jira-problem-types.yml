@@ -1,0 +1,169 @@
+specification: API Commons ErrorCatalog
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: derived
+source: |
+  Derived from the first-party Atlassian OpenAPI definitions harvested 2026-09-06 —
+  developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json,
+  /cloud/jira/software/swagger.v3.json and /cloud/jira/service-desk/swagger.v3.json.
+  Titles and remediation enriched from the Jira Cloud REST API intro and rate-limiting docs.
+format: atlassian-error-collection
+format_note: |
+  Jira does NOT emit RFC 9457 application/problem+json. Errors are returned as an Atlassian
+  ErrorCollection envelope with application/json.
+envelope:
+  media_type: application/json
+  shape: ErrorCollection
+  fields:
+  - name: errorMessages
+    type: array<string>
+    description: Human-readable error messages not tied to a specific field.
+  - name: errors
+    type: object
+    description: Map of field name to the validation message for that field.
+  - name: warningMessages
+    type: array<string>
+    description: Non-fatal warnings returned alongside a successful or partial response.
+  - name: status
+    type: integer
+    description: HTTP status echoed by some Service Management and Software endpoints (ErrorResponse shape).
+rfc9457: false
+problem_types_declared: 0
+status_codes_observed: 2570
+response_schemas_referenced:
+- schema: ErrorCollection
+  occurrences: 330
+- schema: ErrorResponse
+  occurrences: 300
+- schema: BulkOperationErrorResponse
+  occurrences: 25
+- schema: OperationMessage
+  occurrences: 21
+- schema: ErrorCollections
+  occurrences: 9
+- schema: LimitExceededResponseBean
+  occurrences: 7
+- schema: ErrorMessage
+  occurrences: 4
+- schema: JqlFunctionPrecomputationUpdateErrorResponse
+  occurrences: 3
+- schema: DetailedErrorCollection
+  occurrences: 2
+- schema: MinimalFieldSchemeToFieldsResponse
+  occurrences: 1
+- schema: FieldSchemeToFieldsResponse
+  occurrences: 1
+- schema: UpdateFieldSchemeParametersResponse
+  occurrences: 1
+errors:
+- code: '400'
+  title: Bad Request
+  occurrences: 534
+  example_description: "Returned if the request is invalid."
+  remediation: "Validate the request body and query parameters against the operation schema; Jira returns per-field messages in errors{}."
+- code: '401'
+  title: Unauthorized
+  occurrences: 727
+  example_description: "Returned if the authentication credentials are incorrect or missing."
+  remediation: "Supply a valid credential — OAuth 2.0 (3LO) bearer token, Forge/Connect JWT, or email + API token via HTTP Basic."
+- code: '403'
+  title: Forbidden
+  occurrences: 526
+  example_description: "Returned if the user does not have the necessary permission."
+  remediation: "The authenticated principal lacks the Jira permission or OAuth scope for this operation. Check the granular scope on the operation and the user's project/global permissions."
+- code: '404'
+  title: Not Found
+  occurrences: 506
+  example_description: "Returned if the customer request does not exist."
+  remediation: "The resource does not exist, or the caller is not permitted to see it — Jira deliberately returns 404 rather than 403 for objects the user cannot browse."
+- code: '405'
+  title: Method Not Allowed
+  occurrences: 2
+  example_description: "Returned if an anonymous call is made to the operation."
+  remediation: "The method is not supported on this path."
+- code: '408'
+  title: Request Timeout
+  occurrences: 2
+  example_description: "Returned if the search is timed out."
+  remediation: "The request timed out server-side; retry with backoff."
+- code: '409'
+  title: Conflict
+  occurrences: 50
+  example_description: "Returned if the plan is not active."
+  remediation: "The resource is in a conflicting state (concurrent edit, duplicate name, or a task already running). Re-read the resource and retry."
+- code: '412'
+  title: Precondition Failed
+  occurrences: 4
+  example_description: "Returned if a request to archive issue(s) is already running."
+  remediation: "A precondition (If-Match / version) failed. Re-read the entity to get its current version and retry."
+- code: '413'
+  title: Payload Too Large
+  occurrences: 17
+  example_description: "Set of Ids is too large. Submit fewer Ids in each payload."
+  remediation: "The request or attachment exceeds the size limit for the operation."
+- code: '416'
+  title: Range Not Satisfiable
+  occurrences: 1
+  example_description: "Returned if the server is unable to satisfy the range of bytes provided."
+  remediation: "The requested byte range cannot be satisfied."
+- code: '422'
+  title: Unprocessable Entity
+  occurrences: 11
+  example_description: "422 response"
+  remediation: "The request was syntactically valid but semantically rejected — for example an invalid JQL expression or an unsupported field configuration."
+- code: '423'
+  title: Locked
+  occurrences: 1
+  example_description: "Returned if a resource related to deletion is locked."
+  remediation: "The resource is locked by another operation."
+- code: '429'
+  title: Too Many Requests
+  occurrences: 54
+  example_description: "API rate limit has been exceeded."
+  remediation: "Rate limit or cost quota exhausted. Read Retry-After, X-RateLimit-Reset and RateLimit-Reason, and back off exponentially with jitter."
+- code: '500'
+  title: Internal Server Error
+  occurrences: 85
+  example_description: "Internal Server Error."
+  remediation: "Server error. Retry idempotent reads with backoff; report persistent failures to Atlassian support with the atl-request-id response header."
+- code: '501'
+  title: Not Implemented
+  occurrences: 1
+  example_description: "The endpoint isn't ready for receiving requests."
+  remediation: "The operation is not implemented on this deployment."
+- code: '503'
+  title: Service Unavailable
+  occurrences: 48
+  example_description: "Service is unavailable due to maintenance or other reasons."
+  remediation: "Service unavailable or the Jira instance is temporarily overloaded / in maintenance. Retry with backoff."
+- code: '504'
+  title: Gateway Timeout
+  occurrences: 1
+  example_description: "The upstream service is busy."
+  remediation: "Upstream timeout; retry with backoff."
+rate_limit_signals:
+  status: '429'
+  headers:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - X-RateLimit-NearLimit
+  - RateLimit-Reason
+  - Retry-After
+  reason_values:
+  - jira-quota-global-based
+  - jira-quota-tenant-based
+  - jira-burst-based
+  - jira-per-issue-on-write
+  source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+tracing_headers:
+- atl-request-id
+- atl-traceid
+docs:
+- https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+- https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,246 @@
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Searched the Atlassian Jira Cloud developer documentation (REST v3 intro, rate limiting, webhooks,
+  REST API policy) on 2026-09-06 and cross-checked every claim against the first-party OpenAPI
+  definitions harvested the same day. Where a convention is visible in the specification it is marked
+  evidence: openapi; where it is only stated in prose the docs URL is recorded.
+auth:
+  style: oauth2-3lo | http-basic-api-token | connect-jwt | forge-asapp
+  primary: OAuth 2.0 authorization code (3LO)
+  header: 'Authorization: Bearer <token>'
+  basic_alternative: 'Authorization: Basic base64(email:api-token)'
+  token_host: https://auth.atlassian.com/oauth/token
+  calling_host_oauth: https://api.atlassian.com/ex/jira/{cloudId}
+  calling_host_basic: https://your-domain.atlassian.net
+  cloudid_discovery: https://api.atlassian.com/oauth/token/accessible-resources
+  evidence: openapi
+  detail: authentication/atlassian-jira-authentication.yml
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication
+idempotency:
+  coverage: none
+  mechanism: none
+  header: null
+  scope: []
+  detail: |
+    Jira Cloud publishes no Idempotency-Key header and no request-scoped replay protection on its
+    write surface. No securityScheme, parameter, or header named idempoten* appears anywhere in the
+    617-operation platform spec, the 105-operation Software spec or the 75-operation Service
+    Management spec, and the REST v3 intro documents no retry-safety contract. A client that retries
+    a POST /rest/api/3/issue after a timeout creates a second work item.
+    The nearest thing Jira ships is a single-flight guard on four async bulk operations
+    (archiveIssuesAsync, archiveIssues, unarchiveIssues, exportArchivedIssues), which return HTTP 412
+    when the same request is already running — the only 412s in the platform spec. There is no
+    If-Match / ETag precondition anywhere in the three specs. Per-issue write throttling
+    (20 writes / 2s, 100 writes / 30s) limits the blast radius of a retry storm without making any
+    single retry safe.
+  evidence: openapi
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+reversibility:
+  grade: documented
+  detail: |
+    Jira's destructive operations have real reversal paths, but Atlassian does not publish the window
+    for the ones that matter most from an API caller's point of view. Nothing below asserts a window
+    the documentation does not state.
+  surfaces:
+  - write: createIssue
+    reversal: deleteIssue
+    reversal_kind: delete
+    window: null
+    window_stated: false
+    note: An issue can be deleted, but deletion is itself the destructive act; there is no undo of the
+      create that restores prior state.
+  - write: deleteIssue
+    reversal: trash-and-restore (UI/admin)
+    reversal_kind: restore
+    window: null
+    window_stated: false
+    note: |
+      Jira moves deleted work items to a project trash that a project admin can restore from, but no
+      REST operation in the harvested specs restores a deleted issue and Atlassian does not state a
+      retention window in the REST reference. Treat DELETE /rest/api/3/issue/{issueIdOrKey} as
+      irreversible from the API.
+  - write: doTransition
+    reversal: doTransition
+    reversal_kind: reverse
+    window: unbounded
+    window_stated: true
+    note: A status transition is reversed by performing the inverse transition, subject only to the
+      workflow allowing it. getTransitions on the issue returns the currently legal reversals.
+  - write: addComment
+    reversal: deleteComment
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: addWorklog
+    reversal: deleteWorklog
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: addAttachment
+    reversal: removeAttachment
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: linkIssues
+    reversal: deleteIssueLink
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: addWatcher
+    reversal: removeWatcher
+    reversal_kind: undo
+    window: unbounded
+    window_stated: true
+  - write: createVersion
+    reversal: deleteAndReplaceVersion
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: createSprint
+    reversal: deleteSprint
+    reversal_kind: delete
+    window: unbounded
+    window_stated: true
+  - write: archiveIssues
+    reversal: unarchiveIssues
+    reversal_kind: restore
+    window: unbounded
+    window_stated: true
+    note: A symmetric archive/unarchive pair on the same bulk endpoint family; both are Premium/Enterprise features.
+  - write: createProject
+    reversal: deleteProject
+    reversal_kind: delete
+    window: null
+    window_stated: false
+    note: |
+      deleteProject moves a project to trash. Atlassian's product documentation describes a trash
+      retention period for projects, but the REST reference for this operation does not state one, so
+      no window is recorded here.
+  reversal_operations_found: 12
+  reversal_windows_stated: 9
+  grade_basis: |
+    A reversal path exists and is named for every write surface enumerated above (documented, 0.4).
+    It is NOT verified (1.0) because the two reversals a caller most needs a window for — restoring a
+    deleted issue and restoring a deleted project — have no window stated in the API documentation.
+dry_run_mode:
+  supported: partial
+  detail: |
+    Jira exposes pre-flight metadata rather than a general dry-run flag. getCreateIssueMeta* returns
+    the fields and allowed values a createIssue call will accept, getTransitions returns the legal
+    transitions before doTransition is called, getBulkEditableFields returns what a bulk edit may
+    touch, and parseJqlQueries validates JQL without executing it. There is no ?dry_run=true on
+    mutating operations.
+  evidence: openapi
+pagination:
+  styles:
+  - name: offset-limit
+    params: [startAt, maxResults]
+    response_fields: [startAt, maxResults, total, isLast, values]
+    note: The dominant style across the platform and Software APIs. `values` carries the page for
+      PageBean-shaped responses; `issues` for search responses.
+  - name: cursor
+    params: [nextPageToken, maxResults]
+    response_fields: [nextPageToken, isLast]
+    note: |
+      The newer style, used by the enhanced JQL search (searchAndReconsileIssuesUsingJql,
+      GET /rest/api/3/search/jql) and by newer bulk endpoints. The v2 offset search was
+      deprecated in favour of it.
+  - name: since-token
+    params: [since]
+    response_fields: [values, since, until, lastPage, nextPage]
+    note: Used by the worklog delta endpoints (getIdsOfWorklogsModifiedSince / DeletedSince).
+  evidence: openapi
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination
+field_expansion:
+  supported: true
+  param: expand
+  style: comma-separated list of expandable sections, e.g. renderedFields,names,schema,transitions,changelog
+  sparse_fields:
+    param: fields
+    style: comma-separated field ids or names; supports negation with a leading `-` and the keywords
+      `*all` and `*navigable`.
+  properties_param: properties
+  evidence: openapi
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#expansion
+metadata:
+  entity_properties: true
+  detail: |
+    Arbitrary caller-owned JSON can be attached to most Jira entities through the entity-property
+    endpoints — issue, comment, worklog, project, dashboard item, board, issue type, user and app
+    properties each have get/set/delete operations. This is Jira's equivalent of a metadata bag and
+    it is namespaced per app.
+  evidence: openapi
+request_id_tracing:
+  supported: true
+  response_headers:
+  - atl-request-id
+  - atl-traceid
+  note: Every Atlassian Edge response carries a request id and trace id; quote atl-request-id when
+    reporting a failure to Atlassian support.
+  evidence: probed
+content_format:
+  body_format: Atlassian Document Format (ADF)
+  detail: |
+    The v3 REST API takes and returns rich text as Atlassian Document Format — a JSON document tree —
+    not wiki markup or HTML. This is the single largest difference between the v2 and v3 APIs and is
+    the reason the MCP server ships a getContentFormatGuide tool. Comment bodies, issue descriptions
+    and worklog comments are all ADF in v3.
+  spec: https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+  evidence: openapi
+versioning:
+  style: path
+  pattern: /rest/api/{version}
+  current: '3'
+  versions_live:
+  - version: '2'
+    status: deprecated
+    note: v2 accepts wiki-markup strings where v3 takes ADF. Atlassian announced the v2 deprecation
+      and published a migration guide; new integrations should target v3.
+  - version: '3'
+    status: current
+  other_surfaces:
+  - path: /rest/agile/1.0
+    product: Jira Software
+  - path: /rest/servicedeskapi
+    product: Jira Service Management
+  - path: /rest/api/3/webhook
+    product: dynamic webhook registration
+  evidence: openapi
+  docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+error_envelope:
+  rfc9457: false
+  media_type: application/json
+  shape: ErrorCollection { errorMessages[], errors{}, warningMessages[] }
+  detail: errors/atlassian-jira-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  headers:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - X-RateLimit-NearLimit
+  - RateLimit-Reason
+  - Retry-After
+  near_limit_signal: 'X-RateLimit-NearLimit: true is returned when under 20% of capacity remains —
+    an early-warning header most APIs do not publish.'
+  detail: rate-limits/atlassian-jira-rate-limits.yml
+  docs: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+cross_links:
+  errors: errors/atlassian-jira-problem-types.yml
+  lifecycle: lifecycle/atlassian-jira-lifecycle.yml
+  authentication: authentication/atlassian-jira-authentication.yml
+  scopes: scopes/atlassian-jira-scopes.yml
+  rate_limits: rate-limits/atlassian-jira-rate-limits.yml
+  data_model: data-model/atlassian-jira-data-model.yml
+docs:
+- https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+- https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+- https://developer.atlassian.com/platform/marketplace/atlassian-rest-api-policy/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

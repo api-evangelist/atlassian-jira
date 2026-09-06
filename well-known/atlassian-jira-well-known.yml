@@ -1,0 +1,151 @@
+specification: API Commons WellKnown
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: probed
+source: |
+  Direct unauthenticated HTTPS probes run 2026-09-06 against every host this record knows: the
+  registrable domain and www, the docs host, the OAuth 2.0 (3LO) authorization host named in the
+  OpenAPI securitySchemes, the Atlassian API gateway host, and the remote MCP host named on
+  https://www.atlassian.com/platform/remote-mcp-server. The tenant server in the OpenAPI
+  (your-domain.atlassian.net) is a templated per-customer host and was not probed.
+hosts:
+- host: atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+    redirect_to: https://www.atlassian.com/.well-known/security.txt
+    file: atlassian-jira-security.txt
+    note: Apex redirects to www, which serves the document with HTTP 200. Recorded as the 301 it
+      actually returned, not as a direct hit.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: www.atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: atlassian-jira-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: developer.atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: atlassian-jira-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: api.atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: atlassian-jira-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: auth.atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: atlassian-jira-security.txt
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: atlassian-jira-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: atlassian-jira-oauth-authorization-server.json
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: mcp.atlassian.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: atlassian-jira-security.txt
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: atlassian-jira-mcp-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource/v1/mcp/authv2
+    status: 200
+    file: atlassian-jira-mcp-oauth-protected-resource.json
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+findings:
+- A PGP-signed security.txt is served on every Atlassian host probed, canonical at
+  https://www.atlassian.com/.well-known/security.txt, with Contact, Policy, Encryption, Expires
+  (2027-02-04) and Hiring fields — a complete RFC 9116 document.
+- auth.atlassian.com serves both OpenID Connect discovery and RFC 8414 OAuth authorization server
+  metadata, including a pushed authorization request endpoint and private_key_jwt client auth.
+- mcp.atlassian.com serves RFC 8414 authorization server metadata with dynamic client registration
+  (RFC 7591) and an RFC 9728 protected-resource document for the remote MCP endpoint, whose
+  scopes_supported list is the authoritative scope set for MCP callers.
+- No agent card (A2A) is published on any Atlassian host. The 404 bodies are genuine 404s, not SPA
+  shells answering 200.
+- No /.well-known/api-catalog and no /.well-known/ai-plugin.json anywhere.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

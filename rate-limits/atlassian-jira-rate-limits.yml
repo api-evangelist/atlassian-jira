@@ -4,103 +4,148 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Atlassian Jira
 providerId: atlassian-jira
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Agile
-  - Atlassian
-  - Bug Tracking
-  - Issue Tracking
-  - ITSM
-  - Kanban
-  - Project Management
-  - Scrum
-  - Service Desk
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Atlassian Jira API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+modified: '2026-09-06'
+generated: '2026-09-06'
+method: searched
+source: https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
+source_note: |
+  Read from Atlassian's published Jira Cloud rate-limiting reference on 2026-09-06. This file REPLACES
+  a 2026-05-04 bulk-sweep scaffold that invented free/professional/enterprise tiers with 10 and 100
+  requests-per-minute limits and a 1,000-request monthly quota. None of those numbers were Atlassian's.
+  Jira does not meter by requests per month at all — it meters an hourly COST BUDGET in points, plus a
+  separate per-second burst limit and a per-issue write limit. All three are recorded below.
+description: |
+  Jira Cloud enforces three independent limits: a points-based hourly cost budget, a per-second burst
+  limit that varies by HTTP method and endpoint, and a per-issue write limit. Any of the three can
+  return 429, and RateLimit-Reason says which one fired.
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
+  nearLimit: X-RateLimit-NearLimit
+  reason: RateLimit-Reason
   retryAfter: Retry-After
-  policy: RateLimit-Policy
+header_notes:
+  X-RateLimit-Reset: ISO 8601 timestamp; returned on 429 responses only.
+  X-RateLimit-NearLimit: Returned as `true` when less than 20% of capacity remains — an early-warning
+    signal an agent can back off on before it is throttled.
+  RateLimit-Reason: Returned on 429 responses only.
+  Retry-After: Seconds to wait; returned on 429 responses only.
+reason_values:
+- value: jira-quota-global-based
+  meaning: The app's shared Global Pool hourly point quota is exhausted.
+- value: jira-quota-tenant-based
+  meaning: The app's Per-Tenant Pool hourly point quota for this site is exhausted.
+- value: jira-burst-based
+  meaning: The per-second request limit for this method or endpoint was exceeded.
+- value: jira-per-issue-on-write
+  meaning: Too many writes against a single issue in the short or long window.
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
+cost_model:
+  unit: points
+  window: hour
+  rules:
+  - operation_class: Core domain object reads (GET / query)
+    cost: 1 point base plus 1 point per object returned
+  - operation_class: Identity and access reads (GET / query)
+    cost: 1 point base plus 2 points per user or group object returned
+  - operation_class: Writes (POST / PUT / PATCH / DELETE)
+    cost: 1 point regardless of scope
+  note: A paginated read that returns 100 issues costs far more than a single write. Reducing
+    maxResults is the most effective lever on Jira quota consumption.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Jira Cloud Platform REST API
-      - Jira Software Cloud REST API
-      - Jira Service Management REST API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Jira Cloud Platform REST API
-      - Jira Software Cloud REST API
-      - Jira Service Management REST API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Jira Cloud Platform REST API
-      - Jira Software Cloud REST API
-      - Jira Service Management REST API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Jira Cloud Platform REST API
-      - Jira Software Cloud REST API
-      - Jira Service Management REST API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Jira Cloud Platform REST API
-      - Jira Software Cloud REST API
-      - Jira Service Management REST API
+- name: Global Pool quota (Tier 1, default)
+  scope: per-app, shared across all tenants
+  metric: points_per_hour
+  limit: 65000
+  timeFrame: hour
+  note: Every app starts here. A single busy customer can exhaust the pool for every other customer of
+    the same app, which is why Atlassian offers Tier 2 on review.
+- name: Per-Tenant Pool quota (Tier 2, granted after review)
+  scope: per-app per-tenant
+  metric: points_per_hour
+  tiers:
+  - plan: Free
+    limit: 65000
+  - plan: Standard
+    formula: 100000 + (10 x users)
+  - plan: Premium
+    formula: 130000 + (20 x users)
+  - plan: Enterprise
+    formula: 150000 + (30 x users)
+    cap: 500000
+  timeFrame: hour
+- name: Burst limit — GET
+  scope: per-app per-tenant per-endpoint
+  metric: requests_per_second
+  limit: 100
+  timeFrame: second
+- name: Burst limit — POST
+  scope: per-app per-tenant per-endpoint
+  metric: requests_per_second
+  limit: 100
+  timeFrame: second
+- name: Burst limit — PUT
+  scope: per-app per-tenant per-endpoint
+  metric: requests_per_second
+  limit: 50
+  timeFrame: second
+- name: Burst limit — DELETE
+  scope: per-app per-tenant per-endpoint
+  metric: requests_per_second
+  limit: 50
+  timeFrame: second
+- name: Burst limit — custom endpoints
+  scope: per-app per-tenant per-endpoint
+  metric: requests_per_second
+  range: 5-500
+  timeFrame: second
+  note: Selected endpoints carry their own per-second ceiling rather than the method default; the
+    published range is 5 to 500 requests per second.
+- name: Per-issue write limit (short window)
+  scope: per-issue
+  metric: write_operations
+  limit: 20
+  timeFrame: 2 seconds
+- name: Per-issue write limit (long window)
+  scope: per-issue
+  metric: write_operations
+  limit: 100
+  timeFrame: 30 seconds
+limit_count: 9
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+- name: Backoff
+  description: Honor Retry-After when present and use exponential backoff with jitter otherwise. Read
+    RateLimit-Reason to know which of the three limits fired — a burst 429 clears in a second, a quota
+    429 may not clear for the rest of the hour.
+- name: Early warning
+  description: Watch X-RateLimit-NearLimit; it is set to true at under 20% remaining, before any 429.
+- name: Quota tiering
+  description: Apps default to the shared Global Pool. Per-Tenant Pool quotas are granted by Atlassian
+    on review, which is an application process, not a plan upgrade.
+webhook_limits:
+- name: Dynamic webhooks — Connect apps
+  limit: 100
+  scope: per app per tenant
+- name: Dynamic webhooks — OAuth 2.0 apps
+  limit: 5
+  scope: per app per user
+- name: Dynamic webhook expiry
+  value: 30 days, refreshable via PUT /rest/api/3/webhook/refresh
+  source: https://developer.atlassian.com/cloud/jira/platform/webhooks/
+tags:
+- Agile
+- Atlassian
+- Issue Tracking
+- Project Management
+- Rate Limiting
+- Quotas
+- Throttling
+docs:
+- https://developer.atlassian.com/cloud/jira/platform/rate-limiting/
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

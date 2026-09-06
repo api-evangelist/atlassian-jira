@@ -1,0 +1,587 @@
+specification: API Commons ToolCrosswalk
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: derived
+source: |
+  Binds the published Atlassian Remote MCP Server Jira tool names
+  (https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) to the operationIds
+  in the first-party Atlassian OpenAPI definitions harvested 2026-09-06. Every operationId below was
+  grepped out of the saved specs; any tool whose expected operationId was NOT found in a spec is
+  recorded in unresolved_rest[] rather than being invented. The live MCP tools/list is OAuth-gated
+  (HTTP 401 anonymously), so the binding is by name and documented semantics, not by comparing
+  inputSchema to parameters — confidence is set accordingly.
+surfaces:
+- kind: openapi
+  name: Jira Cloud platform REST API v3
+  file: openapi/atlassian-jira-platform-openapi.json
+  gated: false
+- kind: openapi
+  name: Jira Software Cloud API
+  file: openapi/atlassian-jira-software-openapi.json
+  gated: false
+- kind: openapi
+  name: Jira Service Management REST API
+  file: openapi/atlassian-jira-service-management-openapi.json
+  gated: false
+- kind: mcp
+  name: Atlassian Remote MCP Server
+  url: https://mcp.atlassian.com/v1/mcp/authv2
+  gated: true
+  gate: OAuth 2.1 bearer; anonymous tools/list returns 401 invalid_token
+- kind: graphql
+  name: Atlassian GraphQL Gateway
+  url: https://api.atlassian.com/graphql
+  gated: true
+  gate: Requires an authenticated Atlassian token; introspection was not attempted anonymously.
+crosswalk:
+- tool: getJiraIssue
+  category: read
+  rest:
+  - operationId: getIssue
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}
+  binding: direct
+  confidence: high
+- tool: searchJiraIssuesUsingJql
+  category: search
+  rest:
+  - operationId: searchForIssuesUsingJql
+    spec: platform
+    method: GET
+    path: /rest/api/3/search
+  - operationId: searchForIssuesUsingJqlPost
+    spec: platform
+    method: POST
+    path: /rest/api/3/search
+  binding: direct
+  confidence: high
+  note: "JQL search; the POST form carries the same body as the tool's query argument."
+- tool: listJiraProjects
+  category: read
+  rest:
+  - operationId: getAllProjects
+    spec: platform
+    method: GET
+    path: /rest/api/3/project
+  - operationId: searchProjects
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/search
+  binding: direct
+  confidence: high
+- tool: listJiraProjectIssueTypesMetadata
+  category: read
+  rest:
+  - operationId: getCreateIssueMetaIssueTypes
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/createmeta/{projectIdOrKey}/issuetypes
+  binding: direct
+  confidence: medium
+  note: "Create-metadata issue types for a project."
+- tool: getJiraIssueTypeMetaWithFields
+  category: read
+  rest:
+  - operationId: getCreateIssueMetaIssueTypeId
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/createmeta/{projectIdOrKey}/issuetypes/{issueTypeId}
+  binding: direct
+  confidence: medium
+- tool: listJiraIssueTransitions
+  category: read
+  rest:
+  - operationId: getTransitions
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/transitions
+  binding: direct
+  confidence: high
+- tool: listJiraIssueLinkTypes
+  category: read
+  rest:
+  - operationId: getIssueLinkTypes
+    spec: platform
+    method: GET
+    path: /rest/api/3/issueLinkType
+  binding: direct
+  confidence: high
+- tool: listJiraIssueRemoteIssueLinks
+  category: read
+  rest:
+  - operationId: getRemoteIssueLinks
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/remotelink
+  binding: direct
+  confidence: high
+- tool: listJiraIssueWorklogs
+  category: read
+  rest:
+  - operationId: getIssueWorklog
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/worklog
+  binding: direct
+  confidence: high
+- tool: lookupJiraAccountId
+  category: read
+  rest:
+  - operationId: findUsers
+    spec: platform
+    method: GET
+    path: /rest/api/3/user/search
+  - operationId: findBulkAssignableUsers
+    spec: platform
+    method: GET
+    path: /rest/api/3/user/assignable/multiProjectSearch
+  binding: direct
+  confidence: medium
+  note: "Account-id lookup by query string."
+- tool: findJiraIssueAssignableUsers
+  category: read
+  rest:
+  - operationId: findAssignableUsers
+    spec: platform
+    method: GET
+    path: /rest/api/3/user/assignable/search
+  binding: direct
+  confidence: high
+- tool: listJiraIssueComments
+  category: read
+  rest:
+  - operationId: getComments
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/comment
+  binding: direct
+  confidence: high
+- tool: listJiraIssueChangelogs
+  category: read
+  rest:
+  - operationId: getChangeLogs
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/changelog
+  binding: direct
+  confidence: high
+- tool: getJiraCurrentUser
+  category: read
+  rest:
+  - operationId: getCurrentUser
+    spec: platform
+    method: GET
+    path: /rest/api/3/myself
+  binding: direct
+  confidence: high
+- tool: getJiraUser
+  category: read
+  rest:
+  - operationId: getUser
+    spec: platform
+    method: GET
+    path: /rest/api/3/user
+  binding: direct
+  confidence: high
+- tool: listJiraStatuses
+  category: read
+  rest:
+  - operationId: getStatuses
+    spec: platform
+    method: GET
+    path: /rest/api/3/status
+  - operationId: getAllStatuses
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}/statuses
+  binding: direct
+  confidence: high
+- tool: listJiraProjectComponents
+  category: read
+  rest:
+  - operationId: getProjectComponentsPaginated
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}/component
+  - operationId: getProjectComponents
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}/components
+  binding: direct
+  confidence: high
+- tool: getJiraProjectVersions
+  category: read
+  rest:
+  - operationId: getProjectVersionsPaginated
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}/version
+  - operationId: getProjectVersions
+    spec: platform
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}/versions
+  binding: direct
+  confidence: high
+- tool: getJiraProjectVersionRelatedWork
+  category: read
+  rest:
+  - operationId: getRelatedWork
+    spec: platform
+    method: GET
+    path: /rest/api/3/version/{id}/relatedwork
+  binding: direct
+  confidence: medium
+- tool: listJiraBoards
+  category: read
+  rest:
+  - operationId: getAllBoards
+    spec: software
+    method: GET
+    path: /rest/agile/1.0/board
+  binding: direct
+  confidence: high
+  note: "Jira Software agile API."
+- tool: getJiraBoardConfig
+  category: read
+  rest:
+  - operationId: getConfiguration
+    spec: platform
+    method: GET
+    path: /rest/api/3/configuration
+  binding: direct
+  confidence: medium
+  note: "Jira Software board configuration."
+- tool: getJiraBoardIssueData
+  category: read
+  rest:
+  - operationId: getIssuesForBoard
+    spec: software
+    method: GET
+    path: /rest/agile/1.0/board/{boardId}/issue
+  binding: direct
+  confidence: medium
+  note: "Backing operation is marked deprecated in the Jira Software spec."
+- tool: getJiraBoardSprintData
+  category: read
+  rest:
+  - operationId: getIssuesForSprint
+    spec: software
+    method: GET
+    path: /rest/agile/1.0/sprint/{sprintId}/issue
+  binding: direct
+  confidence: medium
+  note: "Backing operation is marked deprecated in the Jira Software spec."
+- tool: listJiraBoardSprints
+  category: read
+  rest:
+  - operationId: getAllSprints
+    spec: software
+    method: GET
+    path: /rest/agile/1.0/board/{boardId}/sprint
+  binding: direct
+  confidence: high
+- tool: listJiraFilters
+  category: read
+  rest:
+  - operationId: getFiltersPaginated
+    spec: platform
+    method: GET
+    path: /rest/api/3/filter/search
+  - operationId: getMyFilters
+    spec: platform
+    method: GET
+    path: /rest/api/3/filter/my
+  binding: direct
+  confidence: high
+- tool: listJiraDashboards
+  category: read
+  rest:
+  - operationId: getAllDashboards
+    spec: platform
+    method: GET
+    path: /rest/api/3/dashboard
+  - operationId: getDashboardsPaginated
+    spec: platform
+    method: GET
+    path: /rest/api/3/dashboard/search
+  binding: direct
+  confidence: high
+- tool: getJiraEntityProperty
+  category: read
+  rest:
+  - operationId: getIssueProperty
+    spec: platform
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/properties/{propertyKey}
+  binding: direct
+  confidence: medium
+  note: "Entity properties span issue, project, board and comment property endpoints; the issue form is the common case."
+- tool: downloadJiraIssueAttachment
+  category: read
+  rest:
+  - operationId: getAttachmentContent
+    spec: platform
+    method: GET
+    path: /rest/api/3/attachment/content/{id}
+  binding: direct
+  confidence: high
+- tool: createJiraIssue
+  category: write
+  rest:
+  - operationId: createIssue
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue
+  binding: direct
+  confidence: high
+- tool: editJiraIssue
+  category: write
+  rest:
+  - operationId: editIssue
+    spec: platform
+    method: PUT
+    path: /rest/api/3/issue/{issueIdOrKey}
+  binding: direct
+  confidence: high
+- tool: transitionJiraIssue
+  category: write
+  rest:
+  - operationId: doTransition
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue/{issueIdOrKey}/transitions
+  - operationId: moveIssuesToSprintAndRank
+    spec: software
+    method: POST
+    path: /rest/agile/1.0/sprint/{sprintId}/issue
+  binding: composite
+  confidence: high
+  note: "Status change maps to doTransition; the tool also accepts sprint assignment, which is a Jira Software operation."
+- tool: addOrEditJiraIssueComment
+  category: write
+  rest:
+  - operationId: addComment
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue/{issueIdOrKey}/comment
+  - operationId: updateComment
+    spec: platform
+    method: PUT
+    path: /rest/api/3/issue/{issueIdOrKey}/comment/{id}
+  binding: composite
+  confidence: high
+  note: "One tool over two REST operations chosen by whether a comment id is supplied."
+- tool: addOrEditJiraIssueWorklog
+  category: write
+  rest:
+  - operationId: addWorklog
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue/{issueIdOrKey}/worklog
+  - operationId: updateWorklog
+    spec: platform
+    method: PUT
+    path: /rest/api/3/issue/{issueIdOrKey}/worklog/{id}
+  binding: composite
+  confidence: high
+- tool: createJiraIssueLink
+  category: write
+  rest:
+  - operationId: linkIssues
+    spec: platform
+    method: POST
+    path: /rest/api/3/issueLink
+  binding: direct
+  confidence: medium
+- tool: manageJiraProjectVersion
+  category: write
+  rest:
+  - operationId: createVersion
+    spec: platform
+    method: POST
+    path: /rest/api/3/version
+  - operationId: updateVersion
+    spec: platform
+    method: PUT
+    path: /rest/api/3/version/{id}
+  - operationId: deleteAndReplaceVersion
+    spec: platform
+    method: POST
+    path: /rest/api/3/version/{id}/removeAndSwap
+  binding: composite
+  confidence: medium
+  note: "Single tool multiplexing create/update/delete on a project version."
+- tool: manageJiraProjectVersionRelatedWork
+  category: write
+  rest:
+  - operationId: createRelatedWork
+    spec: platform
+    method: POST
+    path: /rest/api/3/version/{id}/relatedwork
+  - operationId: updateRelatedWork
+    spec: platform
+    method: PUT
+    path: /rest/api/3/version/{id}/relatedwork
+  - operationId: deleteRelatedWork
+    spec: platform
+    method: DELETE
+    path: /rest/api/3/version/{versionId}/relatedwork/{relatedWorkId}
+  binding: composite
+  confidence: low
+  note: "Related-work operations are experimental in the platform spec."
+- tool: manageJiraSprint
+  category: write
+  rest:
+  - operationId: createSprint
+    spec: software
+    method: POST
+    path: /rest/agile/1.0/sprint
+  - operationId: updateSprint
+    spec: software
+    method: PUT
+    path: /rest/agile/1.0/sprint/{sprintId}
+  - operationId: partiallyUpdateSprint
+    spec: software
+    method: POST
+    path: /rest/agile/1.0/sprint/{sprintId}
+  - operationId: deleteSprint
+    spec: software
+    method: DELETE
+    path: /rest/agile/1.0/sprint/{sprintId}
+  binding: composite
+  confidence: medium
+- tool: createJiraBoard
+  category: write
+  rest:
+  - operationId: createBoard
+    spec: software
+    method: POST
+    path: /rest/agile/1.0/board
+  binding: direct
+  confidence: high
+- tool: watchJiraIssue
+  category: write
+  rest:
+  - operationId: addWatcher
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue/{issueIdOrKey}/watchers
+  - operationId: removeWatcher
+    spec: platform
+    method: DELETE
+    path: /rest/api/3/issue/{issueIdOrKey}/watchers
+  binding: composite
+  confidence: high
+- tool: uploadAttachmentToJiraIssue
+  category: write
+  rest:
+  - operationId: addAttachment
+    spec: platform
+    method: POST
+    path: /rest/api/3/issue/{issueIdOrKey}/attachments
+  binding: direct
+  confidence: high
+- tool: editJiraEntityProperty
+  category: write
+  rest:
+  - operationId: setIssueProperty
+    spec: platform
+    method: PUT
+    path: /rest/api/3/issue/{issueIdOrKey}/properties/{propertyKey}
+  binding: direct
+  confidence: medium
+- tool: deleteJiraIssue
+  category: delete
+  rest:
+  - operationId: deleteIssue
+    spec: platform
+    method: DELETE
+    path: /rest/api/3/issue/{issueIdOrKey}
+  binding: direct
+  confidence: high
+  note: "Admin-disabled by default on the MCP server."
+- tool: deleteJiraComment
+  category: delete
+  rest:
+  - operationId: deleteComment
+    spec: platform
+    method: DELETE
+    path: /rest/api/3/issue/{issueIdOrKey}/comment/{id}
+  binding: direct
+  confidence: high
+  note: "Admin-disabled by default on the MCP server."
+- tool: deleteJiraIssueAttachment
+  category: delete
+  rest:
+  - operationId: removeAttachment
+    spec: platform
+    method: DELETE
+    path: /rest/api/3/attachment/{id}
+  binding: direct
+  confidence: high
+  note: "Admin-disabled by default on the MCP server."
+- tool: createJiraProject
+  category: manage
+  rest:
+  - operationId: createProject
+    spec: platform
+    method: POST
+    path: /rest/api/3/project
+  binding: direct
+  confidence: high
+  note: "Admin-disabled by default on the MCP server."
+- tool: updateJiraProject
+  category: manage
+  rest:
+  - operationId: updateProject
+    spec: platform
+    method: PUT
+    path: /rest/api/3/project/{projectIdOrKey}
+  binding: direct
+  confidence: high
+  note: "Admin-disabled by default on the MCP server."
+mcp_only:
+- tool: atlassianUserInfo
+  reason: "Atlassian identity endpoint on api.atlassian.com/me, outside the Jira REST surface."
+- tool: getAccessibleAtlassianResources
+  reason: "Backed by https://api.atlassian.com/oauth/token/accessible-resources, an OAuth gateway endpoint that is not part of any Jira OpenAPI document."
+- tool: discover
+  reason: "MCP-server-side deferred-tool search; no REST counterpart."
+- tool: executeRead
+  reason: "MCP-server-side deferred-tool dispatcher; no REST counterpart."
+- tool: executeWrite
+  reason: "MCP-server-side deferred-tool dispatcher; no REST counterpart."
+- tool: executeDestructive
+  reason: "MCP-server-side deferred-tool dispatcher; no REST counterpart."
+- tool: getContentFormatGuide
+  reason: "Static authoring guidance served by the MCP server; no REST counterpart."
+- tool: getJsmOpsAlerts
+  reason: "Jira Service Management Operations (Opsgenie-lineage) alerts; not in the service-desk OpenAPI document."
+- tool: getJsmOpsScheduleInfo
+  reason: "JSM Operations on-call schedules; not in the service-desk OpenAPI document."
+- tool: getJsmOpsTeamInfo
+  reason: "JSM Operations teams; not in the service-desk OpenAPI document."
+- tool: updateJsmOpsAlert
+  reason: "JSM Operations alert actions; not in the service-desk OpenAPI document."
+rest_only:
+  operation_count: 716
+  note: |
+    The Jira REST surface is far larger than the MCP tool surface. 781 operations are
+    published across the three specs and only 65 are reachable through a named Jira MCP tool.
+    Everything else — workflow, screen, field-configuration, permission-scheme, security-scheme,
+    notification-scheme, audit, JQL-function, app-property and bulk administration — has no tool and
+    must be called over REST.
+coverage:
+  openapi_operations: 781
+  mcp_jira_tools: 46
+  tools_bound_to_rest: 46
+  operations_reachable_via_tool: 65
+  mcp_only_tools: 11
+  rest_only_operations: 716
+  percent_operations_tool_reachable: 8.3
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

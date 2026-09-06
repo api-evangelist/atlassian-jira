@@ -1,0 +1,96 @@
+specification: API Commons Webhooks
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: https://developer.atlassian.com/cloud/jira/platform/webhooks/
+asyncapi_published: false
+asyncapi_note: |
+  Atlassian publishes a real, well-documented Jira webhook surface but no AsyncAPI document for it.
+  /asyncapi.yaml and /cloud/jira/platform/asyncapi.yaml both 404 on developer.atlassian.com. Nothing is
+  generated here in its place — this file is the webhook catalog, not a synthesized AsyncAPI.
+transport: https-webhook
+payload_format: application/json
+registration:
+- method: rest-dynamic
+  operation: POST /rest/api/3/webhook
+  audience: Atlassian Connect apps and OAuth 2.0 (3LO) apps
+  limits:
+  - Connect apps: maximum 100 webhooks per app per tenant
+  - OAuth 2.0 apps: maximum 5 webhooks per app per user
+  expiry: Dynamic webhooks expire after 30 days and must be refreshed via PUT /rest/api/3/webhook/refresh
+- method: rest-v1
+  operation: POST /rest/webhooks/1.0/webhook
+  audience: Integrations that are neither Connect nor OAuth 2.0 apps
+- method: app-descriptor
+  audience: Atlassian Connect apps declaring webhooks statically in the descriptor
+- method: admin-ui
+  audience: Jira site administrators registering a webhook by hand
+security:
+- audience: Atlassian Connect apps
+  mechanism: Payload signed with the app's sharedSecret
+- audience: OAuth 2.0 apps
+  mechanism: Bearer token in the Authorization header, signed with the app's client secret
+- audience: Admin-registered webhooks
+  mechanism: Optional shared secret producing an HMAC in the X-Hub-Signature header, WebSub
+    `method=signature` form
+delivery_headers:
+- X-Atlassian-Webhook-Identifier
+- X-Atlassian-Webhook-Retry
+- X-Atlassian-Webhook-Flow
+- X-Hub-Signature
+payload_envelope:
+  fields:
+  - timestamp
+  - webhookEvent
+  - issue (REST issue shape)
+  - user (condensed user shape, without locale, emailAddress or groups)
+  - changelog (on update events only)
+  - comment (on comment events)
+event_groups:
+- name: Issue
+  events: [jira:issue_created, jira:issue_updated, jira:issue_deleted]
+- name: Comment
+  events: [comment_created, comment_updated, comment_deleted]
+- name: Worklog
+  events: [worklog_created, worklog_updated, worklog_deleted]
+- name: Project
+  events: [project_created, project_updated, project_deleted]
+- name: Version
+  events: [jira:version_created, jira:version_updated, jira:version_released, jira:version_unreleased,
+    jira:version_deleted, jira:version_moved]
+- name: Sprint
+  events: [sprint_created, sprint_started, sprint_closed, sprint_updated, sprint_deleted]
+- name: Board
+  events: [board_created, board_updated, board_deleted, board_configuration_changed]
+- name: User
+  events: [user_created, user_updated, user_deleted]
+- name: Issue link
+  events: [issuelink_created, issuelink_deleted]
+- name: Attachment
+  events: [attachment_created, attachment_deleted]
+- name: Issue property
+  events: [issue_property_set, issue_property_deleted]
+- name: Filter
+  events: [filter_created, filter_updated, filter_deleted]
+- name: Issue type
+  events: [issuetype_created, issuetype_updated, issuetype_deleted]
+- name: Other documented groups
+  events: []
+  note: |
+    Atlassian's webhook reference also documents System Configuration, Jira Expressions and additional
+    platform event groups. Only the event names read directly from the reference are enumerated above;
+    the remaining group names are recorded without inventing member event strings.
+event_group_count: 14
+completeness: partial
+completeness_note: |
+  The event names above are the ones the Jira webhook reference states verbatim. The reference is
+  organised by group and does not enumerate every string on one page, so this catalog is a documented
+  subset rather than an exhaustive list. It is marked partial deliberately.
+docs:
+- https://developer.atlassian.com/cloud/jira/platform/webhooks/
+- https://developer.atlassian.com/cloud/jira/platform/modules/webhook/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

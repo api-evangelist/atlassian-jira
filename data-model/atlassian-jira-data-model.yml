@@ -1,0 +1,230 @@
+specification: API Commons DataModel
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: derived
+source: |
+  Derived from components.schemas $ref links and id-reference fields in the first-party Atlassian
+  OpenAPI definitions harvested 2026-09-06 (platform swagger-v3.v3.json, software swagger.v3.json,
+  service-desk swagger.v3.json). Entity descriptions taken from the specs' own schema descriptions.
+root_entity: IssueBean
+identifier_conventions:
+- name: issue key
+  form: <PROJECTKEY>-<number>
+  example_pattern: 'ABC-123'
+  note: Most issue operations accept issueIdOrKey, so either the numeric id or the human key resolves.
+- name: project key
+  form: uppercase alphanumeric
+  note: Project operations accept projectIdOrKey.
+- name: accountId
+  form: opaque Atlassian account identifier
+  note: Replaced username/userKey across the API under the user-privacy migration; usernames are no longer accepted.
+- name: cloudId
+  form: uuid
+  note: Required when calling Jira through api.atlassian.com/ex/jira/{cloudId} with a 3LO token.
+entities:
+- name: IssueBean
+  spec: platform
+  description: "Details about an issue."
+  property_count: 15
+  relationships:
+  - type: has_many
+    target: IssueTransition
+    via: transitions
+    evidence: $ref
+- name: Project
+  spec: platform
+  description: "Details about a project."
+  property_count: 34
+  relationships:
+  - type: has_many
+    target: ProjectComponent
+    via: components
+    evidence: $ref
+  - type: has_many
+    target: IssueTypeDetails
+    via: issueTypes
+    evidence: $ref
+  - type: has_many
+    target: Version
+    via: versions
+    evidence: $ref
+- name: User
+  spec: platform
+  description: "A user with details as permitted by the user's Atlassian Account privacy settings. However, be aware of these exceptions:   *  User record deleted from Atlassian: This occurs as the result of a right "
+  property_count: 16
+- name: Comment
+  spec: platform
+  description: "A comment."
+  property_count: 12
+  relationships:
+  - type: belongs_to
+    target: author
+    via: author
+    evidence: id-reference
+- name: Worklog
+  spec: platform
+  description: "Details of a worklog."
+  property_count: 13
+  relationships:
+  - type: belongs_to
+    target: author
+    via: author
+    evidence: id-reference
+  - type: belongs_to
+    target: issueId
+    via: issueId
+    evidence: id-reference
+- name: IssueTransition
+  spec: platform
+  description: "Details of an issue transition."
+  property_count: 11
+- name: FieldDetails
+  spec: platform
+  description: "Details about a field."
+  property_count: 10
+- name: Version
+  spec: platform
+  description: "Details about a project version."
+  property_count: 19
+  relationships:
+  - type: belongs_to
+    target: project
+    via: project
+    evidence: id-reference
+  - type: belongs_to
+    target: projectId
+    via: projectId
+    evidence: id-reference
+- name: ProjectComponent
+  spec: platform
+  description: "Details about a project component."
+  property_count: 16
+  relationships:
+  - type: belongs_to
+    target: assignee
+    via: assignee
+    evidence: id-reference
+  - type: belongs_to
+    target: project
+    via: project
+    evidence: id-reference
+  - type: belongs_to
+    target: projectId
+    via: projectId
+    evidence: id-reference
+- name: IssueTypeDetails
+  spec: platform
+  description: "Details about an issue type."
+  property_count: 10
+- name: Attachment
+  spec: platform
+  description: "Details about an attachment."
+  property_count: 9
+  relationships:
+  - type: belongs_to
+    target: author
+    via: author
+    evidence: id-reference
+- name: IssueLink
+  spec: platform
+  description: "Details of a link between issues."
+  property_count: 5
+- name: Filter
+  spec: platform
+  description: "Details about a filter."
+  property_count: 15
+- name: Dashboard
+  spec: platform
+  description: "Details of a dashboard."
+  property_count: 14
+- name: StatusDetails
+  spec: platform
+  description: "A status."
+  property_count: 7
+- name: Priority
+  spec: platform
+  description: "An issue priority."
+  property_count: 9
+- name: Resolution
+  spec: platform
+  description: "Details of an issue resolution."
+  property_count: 4
+- name: Group
+  spec: platform
+  property_count: 5
+- name: Board
+  spec: software
+  description: "Details about a board."
+  property_count: 9
+- name: RequestTypeDTO
+  spec: service-management
+  property_count: 15
+  relationships:
+  - type: belongs_to
+    target: serviceDeskId
+    via: serviceDeskId
+    evidence: id-reference
+- name: CustomerRequestDTO
+  spec: service-management
+  property_count: 19
+  relationships:
+  - type: belongs_to
+    target: issueId
+    via: issueId
+    evidence: id-reference
+  - type: belongs_to
+    target: issueKey
+    via: issueKey
+    evidence: id-reference
+  - type: belongs_to
+    target: reporter
+    via: reporter
+    evidence: id-reference
+  - type: belongs_to
+    target: requestType
+    via: requestType
+    evidence: id-reference
+  - type: belongs_to
+    target: requestTypeId
+    via: requestTypeId
+    evidence: id-reference
+  - type: belongs_to
+    target: serviceDesk
+    via: serviceDesk
+    evidence: id-reference
+  - type: belongs_to
+    target: serviceDeskId
+    via: serviceDeskId
+    evidence: id-reference
+- name: ServiceDeskDTO
+  spec: service-management
+  property_count: 6
+  relationships:
+  - type: belongs_to
+    target: projectId
+    via: projectId
+    evidence: id-reference
+  - type: belongs_to
+    target: projectKey
+    via: projectKey
+    evidence: id-reference
+- name: OrganizationDTO
+  spec: service-management
+  property_count: 6
+- name: QueueDTO
+  spec: service-management
+  property_count: 6
+- name: Webhook
+  spec: platform
+  description: "A webhook."
+  property_count: 7
+entity_count: 25
+relationship_count: 23
+docs:
+- https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+- https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,68 @@
+specification: API Commons AgentSkill Index
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: generated
+source: |
+  Authored by the API Evangelist enrichment pipeline on 2026-09-06 and grounded entirely in the
+  first-party Atlassian OpenAPI definitions harvested the same day. Every operationId named in every
+  skill was verified present in those documents before the skill was written; none is invented.
+  Atlassian publishes no skills/ directory and no AGENTS.md — developer.atlassian.com/AGENTS.md and
+  /skills/ both return 404 — so these are generated, not harvested.
+provider_published_skills: false
+provider_published_skills_evidence:
+- url: https://developer.atlassian.com/AGENTS.md
+  status: 404
+- url: https://developer.atlassian.com/skills/
+  status: 404
+skills:
+- name: atlassian-jira-create-and-triage-work-item
+  file: skills/atlassian-jira-create-and-triage-work-item.md
+  api: Jira Cloud platform REST API v3
+  operations: 12
+  summary: Create a work item with valid, project-correct fields, assign it, link it, and understand
+    why the create is not safely retryable.
+- name: atlassian-jira-search-work-items-with-jql
+  file: skills/atlassian-jira-search-work-items-with-jql.md
+  api: Jira Cloud platform REST API v3
+  operations: 7
+  summary: Validate JQL before running it, use the cursor-based search endpoint, and keep the hourly
+    points budget under control.
+- name: atlassian-jira-transition-a-work-item
+  file: skills/atlassian-jira-transition-a-work-item.md
+  api: Jira Cloud platform REST API v3
+  operations: 6
+  summary: Discover the legal transitions for this issue in this status before moving it, and know
+    which moves can be taken back.
+- name: atlassian-jira-log-work-and-comment
+  file: skills/atlassian-jira-log-work-and-comment.md
+  api: Jira Cloud platform REST API v3
+  operations: 11
+  summary: Write comments, worklogs and attachments in Atlassian Document Format, and reverse each
+    one with its documented inverse.
+- name: atlassian-jira-manage-sprints-and-boards
+  file: skills/atlassian-jira-manage-sprints-and-boards.md
+  api: Jira Software Cloud API (Agile REST 1.0)
+  operations: 9
+  summary: Drive boards and sprints on the /rest/agile/1.0 surface and avoid the eight deprecated
+    issue-listing operations.
+skill_count: 5
+grounding:
+  specs:
+  - openapi/atlassian-jira-platform-openapi.json
+  - openapi/atlassian-jira-software-openapi.json
+  conventions: conventions/atlassian-jira-conventions.yml
+  errors: errors/atlassian-jira-problem-types.yml
+  rate_limits: rate-limits/atlassian-jira-rate-limits.yml
+  lifecycle: lifecycle/atlassian-jira-lifecycle.yml
+cross_cutting_rules_taught:
+- Atlassian Document Format is required for every rich-text body in v3; a plain string is a 400.
+- There is no idempotency key on any Jira write — read before you retry.
+- Errors are an Atlassian ErrorCollection envelope, not RFC 9457 problem+json.
+- 429 carries RateLimit-Reason; the four reasons need four different backoff strategies.
+- Jira meters an hourly points budget, where a read costs 1 point per object returned.
+- deleteIssue has no REST restore path and no documented retention window.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,64 @@
+specification: API Commons Sandbox
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Searched the Atlassian developer and admin documentation 2026-09-06. Jira has no test-mode key
+  prefix, no test cards, no time simulation and no fixture tooling — it is not a payments-shaped API.
+  What it does have are two genuine pre-production surfaces, both recorded below with the URL probed.
+model: separate-instance
+test_mode_keys: false
+test_mode_keys_note: |
+  There is no test-vs-live credential split. An API token or OAuth app is scoped to a Jira site, so
+  "test mode" means pointing at a different site, not at a different key prefix. Nothing resembling a
+  sk_test_/pk_live_ convention exists in the Jira credential model.
+environments:
+- name: Free Jira Cloud site
+  kind: free-tier-instance
+  url: https://go.atlassian.com/cloud-dev
+  status: 200
+  cost: free
+  detail: |
+    Atlassian's documented route to a development Jira Cloud site for app builders. It is a real Jira
+    site on the Free plan (10 users, 2 GB storage), reachable at your-domain.atlassian.net and callable
+    with the same REST API, OAuth scopes and webhooks as production. This is the practical sandbox for
+    anyone integrating over REST.
+- name: Jira Cloud sandbox
+  kind: paid-preproduction-clone
+  cost: included with Premium and Enterprise
+  detail: |
+    A separate sandbox instance of a customer's own Jira site, listed as a Premium/Enterprise feature on
+    the Jira pricing page ("sandbox environments"). It is a tenant-level pre-production clone, not a
+    developer test key, and is unavailable on Free and Standard.
+  source: https://www.atlassian.com/software/jira/pricing
+- name: Forge development environment
+  kind: app-environment
+  detail: |
+    Forge apps deploy into named environments — development, staging and production — via
+    `forge deploy -e development`. The app runs against a real Jira site; the environment separates the
+    app build, not the data.
+  source: https://developer.atlassian.com/platform/forge/cli-reference/
+test_data:
+  test_cards: null
+  test_bank_accounts: null
+  test_tokens: null
+  note: Not applicable — Jira has no payment surface. No test values are published and none are
+    invented here.
+time_simulation: false
+time_simulation_note: No test clocks or time-travel tooling. Sprint dates, SLA clocks and due dates run
+  on real time in every environment.
+fixtures_and_triggers:
+  available: partial
+  detail: |
+    There is no fixture generator. The closest published equivalents are the project templates a new
+    project can be created from, and the create-metadata endpoints (getCreateIssueMetaIssueTypes,
+    getCreateIssueMetaIssueTypeId) that tell a caller which fields a createIssue will accept before it
+    is called — pre-flight introspection rather than seeded test data.
+docs:
+- https://go.atlassian.com/cloud-dev
+- https://developer.atlassian.com/platform/forge/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

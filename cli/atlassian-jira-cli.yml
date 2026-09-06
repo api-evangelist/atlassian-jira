@@ -1,0 +1,71 @@
+specification: API Commons CLI
+specificationVersion: '0.1'
+provider: Atlassian Jira
+providerId: atlassian-jira
+generated: '2026-09-06'
+method: searched
+source: |
+  Searched the Atlassian developer documentation 2026-09-06. Two first-party command-line tools are
+  published: the Atlassian CLI (acli), which drives Jira directly, and the Forge CLI, which builds and
+  deploys apps onto the Atlassian platform. Command groups below are read from the published command
+  reference; the npm versions are from registry.npmjs.org metadata the same day.
+clis:
+- name: Atlassian CLI
+  binary: acli
+  official: true
+  docs: https://developer.atlassian.com/cloud/acli/
+  command_reference: https://developer.atlassian.com/cloud/acli/reference/commands/
+  install_docs: https://developer.atlassian.com/cloud/acli/guides/install-macos/
+  distribution: platform installers and package managers documented per OS on the install guides;
+    not distributed through npm or PyPI.
+  auth: acli jira auth — API token or OAuth against a Jira Cloud site.
+  command_groups:
+  - group: admin
+    commands: [auth, user]
+    description: Organization administration — authenticate as an org admin and manage users.
+  - group: jira
+    commands: [auth, board, dashboard, field, filter, project, sprint, workitem]
+    description: The Jira surface. `workitem` is the current name for what the REST API calls an issue.
+  - group: rovodev
+    commands: [auth]
+    description: Authenticate the Rovo Dev coding agent.
+  - group: feedback
+    commands: []
+    description: Submit a request or report to Atlassian.
+  key_flows:
+  - name: Create a work item from the shell
+    example: acli jira workitem create
+    rest_equivalent: createIssue
+  - name: Search work items with JQL
+    example: acli jira workitem search
+    rest_equivalent: searchForIssuesUsingJql
+  - name: Manage sprints
+    example: acli jira sprint
+    rest_equivalent: createSprint / updateSprint / deleteSprint (Jira Software)
+- name: Forge CLI
+  binary: forge
+  official: true
+  docs: https://developer.atlassian.com/platform/forge/cli-reference/
+  package: https://www.npmjs.com/package/@forge/cli
+  registry: npm
+  install: npm install -g @forge/cli
+  version: 13.5.0
+  published: '2026-08-31'
+  description: |
+    Builds, deploys, installs and tunnels Atlassian Forge apps — the serverless app platform that runs
+    on Atlassian infrastructure and calls the same Jira REST APIs on the app's behalf. It is an app
+    lifecycle tool, not a Jira data tool.
+  key_flows:
+  - name: Scaffold an app
+    example: forge create
+  - name: Deploy and install into a Jira site
+    example: forge deploy && forge install
+  - name: Local development tunnel
+    example: forge tunnel
+notes: |
+  There is no first-party Jira CLI distributed through Homebrew core, npm or PyPI under an
+  Atlassian-owned name other than @forge/cli. Widely used community CLIs (ankitpokhrel/jira-cli,
+  go-jira) are third-party and are deliberately not listed here.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
